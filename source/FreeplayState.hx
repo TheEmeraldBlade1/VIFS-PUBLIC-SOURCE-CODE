@@ -39,7 +39,7 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
-	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 5', 'WEEK J', '???', 'EXTRAS'];
+	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J', '???', 'EXTRAS'];
 
 	private var iconArray:Array<HealthIcon> = [];
 
@@ -105,12 +105,30 @@ class FreeplayState extends MusicBeatState
 		addSong('reactor', 1, 'impostor3', FlxColor.GREEN);
 		addSong('ejected', 1, 'parasite', FlxColor.GREEN);
 
+		addSong('WEEK 3', 1, ' ', FlxColor.WHITE);
+
+		addSong('mando', 1, 'yellow', FlxColor.YELLOW);
+		addSong('dlow', 1, 'yellow', FlxColor.YELLOW);
+		addSong('oversight', 1, 'white', FlxColor.WHITE);
+		addSong('Danger', 1, 'black', FlxColor.BLACK);
+
 		addSong('WEEK 5', 1, ' ', FlxColor.WHITE);
 
 		addSong('Ashes', 1, 'maroon', FlxColor.fromRGB(82,35,47));
 		addSong('Stealth', 1, 'maroon', FlxColor.fromRGB(82,35,47));
 		addSong('Magmatic', 1, 'maroon', FlxColor.fromRGB(82,35,47));
 		addSong('Boiling-Point', 1, 'boilingpoint', FlxColor.fromRGB(82,35,47));
+
+		addSong('WEEK 6', 1, ' ', FlxColor.WHITE);
+
+		addSong('Delusion', 1, 'gray', FlxColor.GRAY);
+		addSong('Insane', 1, 'gray', FlxColor.GRAY);
+		addSong('Blackout', 1, 'gray', FlxColor.GRAY);
+		addSong('Neurotic', 1, 'gray', FlxColor.GRAY);
+
+		addSong('WEEK 7', 1, ' ', FlxColor.WHITE);
+
+		addSong('pretender', 1, 'pretender', FlxColor.GRAY);
 
 		addSong('WEEK J', 1, ' ', FlxColor.WHITE);
 
