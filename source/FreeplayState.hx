@@ -104,6 +104,7 @@ class FreeplayState extends MusicBeatState
 		addSong('lights-down', 1, 'impostor3', FlxColor.GREEN);
 		addSong('reactor', 1, 'impostor3', FlxColor.GREEN);
 		addSong('ejected', 1, 'parasite', FlxColor.GREEN);
+		addSong('double-trouble', 1, 'dt', FlxColor.GREEN);
 
 		addSong('WEEK 3', 1, ' ', FlxColor.WHITE);
 
@@ -111,6 +112,7 @@ class FreeplayState extends MusicBeatState
 		addSong('dlow', 1, 'yellow', FlxColor.YELLOW);
 		addSong('oversight', 1, 'white', FlxColor.WHITE);
 		addSong('Danger', 1, 'black', FlxColor.BLACK);
+		addSong('Double-Kill', 1, 'whiteblack', FlxColor.BLACK);
 
 		addSong('WEEK 5', 1, ' ', FlxColor.WHITE);
 

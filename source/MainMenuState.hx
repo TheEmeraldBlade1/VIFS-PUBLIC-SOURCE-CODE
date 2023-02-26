@@ -358,9 +358,11 @@ class MainMenuState extends MusicBeatState
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new OptionsState());
 				trace("Options Menu Selected");
-			case 'Beans' | 'Credits' | 'Shop':
+			case 'Beans' | 'Credits':
 				ClientPrefs.saveSettings();
 				FlxG.switchState(new MainMenuState());
+			case 'Shop':
+				FlxG.switchState(new ShopState());
 			case 'Skinny Nuts':
 				PlayState.SONG = Song.loadFromJson('skinny-nuts-hard', 'skinny-nuts');
 				PlayState.skinnyNuts = true;

@@ -50,6 +50,11 @@ class ClientPrefs {
 	public static var botca:Bool = true;
 	public static var safeFrame:Int = 8;
 
+	public static var charOverrides:Array<String> = ['', '', ''];
+	public static var beans:Int = 0;
+	public static var boughtArray:Array<Bool> = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+	// should be enough if u add more stuff fuck you >:(
+
 	// SONG MODS
 	public static var loopsong:Bool = false;
 

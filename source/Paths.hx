@@ -1,5 +1,6 @@
 package;
 
+import openfl.display3D.textures.Texture;
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
@@ -33,6 +34,19 @@ class Paths
 	public static var customSoundsLoaded:Map<String, Sound> = new Map<String, Sound>();
 	#end
 	#end
+
+	public static var currentTrackedAssets:Map<String, FlxGraphic> = [];
+
+	public static var localTrackedAssets:Array<String> = [];
+
+	public static var currentTrackedTextures:Map<String, Texture> = [];
+
+	public static var dumpExclusions:Array<String> =
+	[
+		'assets/music/freakyMenu.$SOUND_EXT',
+		'assets/shared/music/breakfast.$SOUND_EXT',
+		'assets/shared/music/tea-time.$SOUND_EXT',
+	];
 
 	public static function destroyLoadedImages(ignoreCheck:Bool = false) {
 		#if MODS_ALLOWED
@@ -68,6 +82,39 @@ class Paths
 		ignoreModFolders.set('scripts', true);
 		ignoreModFolders.set('weeks', true);
 		#end
+	}
+
+	/// haya I love you for the base cache dump I took to the max
+	public static function clearUnusedMemory() {
+		// clear non local assets in the tracked assets list
+		var counter:Int = 0;
+		for (key in currentTrackedAssets.keys())
+		{
+			if (!localTrackedAssets.contains(key) && !dumpExclusions.contains(key))
+			{
+				var obj = currentTrackedAssets.get(key);
+				if (obj != null)
+				{
+					var isTexture:Bool = currentTrackedTextures.exists(key);
+					if (isTexture)
+					{
+						var texture = currentTrackedTextures.get(key);
+						texture.dispose();
+						texture = null;
+						currentTrackedTextures.remove(key);
+					}
+					@:privateAccess
+					if (openfl.Assets.cache.hasBitmapData(key))
+					{
+						openfl.Assets.cache.removeBitmapData(key);
+						FlxG.bitmap._cache.remove(key);
+					}
+					obj.destroy();
+					currentTrackedAssets.remove(key);
+					counter++;
+				}
+			}
+		}
 	}
 
 	static public function setCurrentLevel(name:String)

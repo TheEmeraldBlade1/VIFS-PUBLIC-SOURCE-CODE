@@ -99,6 +99,16 @@ class Note extends FlxSprite
 						missHealth = 0.3;
 					}
 					hitCausesMiss = true;
+				case 'Opponent 2 Sing':
+					reloadNote('BHURT');
+					colorSwap.hue = 0;
+					colorSwap.saturation = 0;
+					colorSwap.brightness = 0;
+				case 'Both Opponents Sing':
+					reloadNote('DKHURT');
+					colorSwap.hue = 0;
+					colorSwap.saturation = 0;
+					colorSwap.brightness = 0;
 				case 'No Animation':
 					noAnimation = true;
 			}
