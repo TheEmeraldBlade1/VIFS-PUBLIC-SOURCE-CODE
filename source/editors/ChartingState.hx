@@ -58,7 +58,9 @@ class ChartingState extends MusicBeatState
 		'Hey!',
 		'Hurt Note',
 		'GF Sing',
-		'No Animation'
+		'No Animation',
+		'Both Opponents Sing',
+		'Opponent 2 Sing'
 	];
 	private var noteTypeIntMap:Map<Int, String> = new Map<Int, String>();
 	private var noteTypeMap:Map<String, Null<Int>> = new Map<String, Null<Int>>();
@@ -66,6 +68,14 @@ class ChartingState extends MusicBeatState
 	var eventStuff:Array<Dynamic> =
 	[
 		['', "Nothing. Yep, that's right."],
+		['Start Video', "Value 1: Video MP4 File Name\nExampe Ejected\nValue 2 (Optional): Hide game elements\n(0 = hide camhud, 1 = hide game, 2 = both)"],
+		['Alter Camera Bop', '1 : alter intensity\n2 : alter interval'],
+		['setChrom', '1 amount, 2 tween speed'],
+		['setGlitch', '1 amount, 2 tween speed'],
+		['chromToggle', '1 amount, 2 interval'],
+		['pink toggle', 'pretty colors'],
+		['Camera Twist', '1: intensity 1\n2: intensity 2'],
+		['Extra Cam Zoom', '1: the zoom??? self explanatory lol'],
 		['Hey!', "Plays the \"Hey!\" animation from Bopeebo,\nValue 1: BF = Only Boyfriend, GF = Only Girlfriend,\nSomething else = Both.\nValue 2: Custom animation duration,\nleave it blank for 0.6s"],
 		['Set GF Speed', "Sets GF head bopping speed,\nValue 1: 1 = Normal speed,\n2 = 1/2 speed, 4 = 1/4 speed etc.\nUsed on Fresh during the beatbox parts.\n\nWarning: Value must be integer!"],
 		['Blammed Lights', "Value 1: 0 = Turn off, 1 = Blue, 2 = Green,\n3 = Pink, 4 = Red, 5 = Orange, Anything else = Random."],
@@ -75,10 +85,56 @@ class ChartingState extends MusicBeatState
 		['Trigger BG Ghouls', "Should be used only in \"schoolEvil\" Stage!"],
 		['Play Animation', "Plays an animation on a Character,\nonce the animation is completed,\nthe animation changes to Idle\n\nValue 1: Animation to play.\nValue 2: Character (BF = 0, Dad = 1, GF = 2)"],
 		['Camera Follow Pos', "Value 1: X\nValue 2: Y\n\nThe camera won't change the follow point\nafter using this, for getting it back\nto normal, leave both values blank."],
-		['Alt Idle Animation', "Sets a speciied suffix after the idle animation name.\nYou can use this to trigger 'idle-alt' if you set\nValue 2 to -alt\n\nValue 1: Character to set (Dad, BF or GF)\nValue 2: New suffix (Leave it blank to disable)"],
+		['Alt Idle Animation', "Sets a speciied suffix after the idle animation name.\nYou can use this to trigger 'idle-alt' if you set\nValue 2 to -alt\n\nValue 1: Character to set (BF = 0, Dad = 1, GF = 2)\nValue 2: New suffix (Leave it blank to disable)"],
 		['Screen Shake', "Value 1: Camera shake\nValue 2: HUD shake\n\nEvery value works as the following example: \"1, 0.05\".\nThe first number (1) is the duration.\nThe second number (0.05) is the intensity."],
 		['Change Character', "Value 1: Character to change (BF = 0, Dad = 1, GF = 2)\nValue 2: New character's name"],
-		['Start Video', "Value 1: Video MP4 File Name\nExampe Ejected\nValue 2 (Optional): Hide game elements\n(0 = hide camhud, 1 = hide game, 2 = both)"]
+		['Reactor Beep', "beep beep value 1 changes the type"],
+		['Double Kill Events', "Events for Double Kill\nDarken - Slowly darkens screen\nBrighten - Removes darkness"],
+		['DefeatDark', "black thingy"],
+		['Finale Flashback Change', "eTHAN THINGY CODE IN GAME!!"],
+		['Finale Drop', "fire ass song this shit fucks\n-aqua"],
+		['Finale End', "fire ass song this shit fucks\n-aqua"],
+		['Jerma Scream', "ladies and gentlemen\nneato newgrounds"],
+		['Jerma Screamed', "ladies and gentlemen\nneato newgrounds"],
+		['flash', "weirdly programmed flash event (dont change) \n 0 and 1 are normal flashes but 2 and 3 are \n for fades in identity crisis specifically"],
+		['Ellie Drop', "ellie dro p down"],
+		['Armed End', 'armed ending'],
+		['Meltdown Video', "'Dead Body Reported'"],
+		['Toogus Sax', "blow"],
+		['Lights out', "turn the lights off"],
+		['Lights on', "turn the lights on"],
+		['Lights on Ending', "turn the lights on ENDING"],
+		['Lights Down OFF', "turn the lights on ENDING"],
+		['Both Opponents', ""],
+		['Opponent Two', ""],
+		['Play On Left', ''],
+		['Cam lock in Who', 'Value 1: "in" for in zoom\nValue 2: "dad" for dad'],
+		['Cam lock in Voting Time', 'Value 1: "in" for in zoom\nValue 2: "dad" for dad'],
+		['Turbulence Ending', 'WAAHHHHHH'],
+		['Turbulence Speed', 'WAAHHHHHH'],
+		['Who Buzz', ''],
+		['Dave AUGH', ''],
+		['Reactor Beep', 'Reactor whomp err'],
+		['bye gf', 'lol'],
+		['scream danger', 'danfer'],
+		['unscream danger', 'based and Black Pilled ha ha memes'],
+		['tuesdayblast', 'loud sound'],
+		['HUD Fade', 'fades da hud'],
+		['Identity Crisis line', 'dialogue'],
+		['Lights Down O2', "WHAT THE F-"],
+		['WTF O2', "WHAT THE F-"],
+		['Victory Darkness', 'let there be dark'],
+		['Show Victory Guy', 'value one is character, value 2 is show or null'],
+		['Defeat Fade', 'defeat bodies apear'],
+		['Defeat Retro', 'defeat bodies apear'],
+		['Identity Crisis Events', 'Changes shifted background in identity crisis. 0 is default, 1 is red\n2 is black, 3 is green.'],
+		['Ejected Start', 'start the actual song lol'],
+		['Forehead', 'start the actual song lol'],
+		['Forehead2', 'start the actual song lol'],
+		['IdentityFade', 'fade in or out black in identity crisis.'],
+		['Orbyy', 'fade in or out black in identity crisis.'],
+		['Orbyy2', 'fade in or out black in identity crisis.'],
+		['tomongusdie', 'kill them.']
 	];
 
 	var _file:FileReference;
@@ -229,6 +285,8 @@ class ChartingState extends MusicBeatState
 				player1: 'bf',
 				player2: 'dad',
 				player3: 'gf',
+				player4: 'mom',
+				fabs: 'fabs',
 				speed: 1,
 				stage: 'stage',
 				validScore: false
@@ -2045,7 +2103,7 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
-		PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-hard", song.toLowerCase());
+		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 		MusicBeatState.resetState();
 	}
 
@@ -2128,6 +2186,8 @@ class ChartingState extends MusicBeatState
 			player1: _song.player1,
 			player2: _song.player2,
 			player3: _song.player3,
+			player4: _song.player4,
+			fabs: _song.fabs,
 			stage: _song.stage,
 			validScore: false
 		};
