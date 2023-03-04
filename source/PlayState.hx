@@ -80,6 +80,8 @@ class PlayState extends MusicBeatState
 
 	var blackChars:Array<String> = ['black', 'blackdk', 'black-run', 'blackalt', 'blackparasite'];
 
+	var dtChars:Array<String> = ['double-trouble', 'dt'];
+
 	var whiteChars:Array<String> = ['white', 'whitedk'];
 
 	var monotoneChars:Array<String> = ['bfscary', 'monotone', 'attack'];
@@ -546,7 +548,7 @@ class PlayState extends MusicBeatState
 		hits2 = 0;
 		earlys = 0;
 
-		if (blackChars.contains(SONG.player2)){
+		if (blackChars.contains(SONG.player2) || dtChars.contains(SONG.player2)){
 			health = 2;
 		}
 
@@ -3499,23 +3501,37 @@ class PlayState extends MusicBeatState
 					healthBar.angle += 90;
 					healthBar.screenCenter();
 					healthBar.x += 500;
-
 					iconP1.x += 1050;
 					iconP2.x += 1050;
-
+					iconP2.flipX = true;
 					healthBarBG.angle += 90;
 					healthBarBG.x += 500;
-
+					healthBar.alpha = 0.75;
+					healthBarBG.alpha = 0.75;
 					healthBarOverlay.angle += 90;
 					healthBarOverlay.x += 500;
 					healthBarOverlay.y = healthBarBG.y - 295;
-
-					//healthBarOverlay.visible = false;
-
-					//healthBar.alpha = 0.75;
-					//healthBarBG.alpha = 0.75;
-					//scoreTxt.alpha = 0.75;
-					iconP2.flipX = true;
+					if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble'){
+						if (SONG.song.toLowerCase() != 'double trouble'){
+							healthBar.visible = false;
+							healthBarBG.visible = false;
+							healthBarOverlay.visible = false;
+						}
+						if (SONG.song.toLowerCase() == 'double trouble'){
+							//iconP1.visible = false;
+							//iconP2.visible = false;
+							timeBar.visible = false;
+							timeBarBG.visible = false;
+							timeTxt.visible = false;
+							healthBar.alpha = 0.25;
+							healthBarBG.alpha = 0.25;
+							healthBarOverlay.alpha = 0.25;
+							iconP1.alpha = 0.25;
+							iconP2.alpha = 0.25;
+							//scoreTxt.visible = false;
+							scoreTxt.y = timeTxt.y;
+						}
+					}
 				}
 				if (fofStages.contains(curStage) && !ClientPrefs.middleScroll && !ClientPrefs.fof || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof)
 					{
@@ -3529,16 +3545,26 @@ class PlayState extends MusicBeatState
 						healthBarBG.x += 500;
 						healthBar.alpha = 0.75;
 						healthBarBG.alpha = 0.75;
+						healthBarOverlay.angle += 90;
+						healthBarOverlay.x += 500;
+						healthBarOverlay.y = healthBarBG.y - 295;
 						if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble'){
-							healthBar.visible = false;
-							healthBarBG.visible = false;
-							healthBarOverlay.visible = false;
-							if ( SONG.song.toLowerCase() == 'double trouble'){
-								iconP1.visible = false;
-								iconP2.visible = false;
+							if (SONG.song.toLowerCase() != 'double trouble'){
+								healthBar.visible = false;
+								healthBarBG.visible = false;
+								healthBarOverlay.visible = false;
+							}
+							if (SONG.song.toLowerCase() == 'double trouble'){
+								//iconP1.visible = false;
+								//iconP2.visible = false;
 								timeBar.visible = false;
 								timeBarBG.visible = false;
 								timeTxt.visible = false;
+								healthBar.alpha = 0.25;
+								healthBarBG.alpha = 0.25;
+								healthBarOverlay.alpha = 0.25;
+								iconP1.alpha = 0.25;
+								iconP2.alpha = 0.25;
 								//scoreTxt.visible = false;
 								scoreTxt.y = timeTxt.y;
 							}
@@ -5105,7 +5131,7 @@ class PlayState extends MusicBeatState
 
 		if (ClientPrefs.middleScroll && ClientPrefs.fof)
 			iconOffset = 270;
-		else if (fofStages.contains(curStage)){
+		else if (fofStages.contains(curStage) || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof){
 			iconOffset = 320;
 		}else{
 			iconOffset = 26;
@@ -5122,7 +5148,7 @@ class PlayState extends MusicBeatState
 			- (150 * iconP2.scale.x) / 2
 			- iconOffset;
 		}
-		else if (fofStages.contains(curStage))
+		else if (fofStages.contains(curStage) || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof)
 		{
 			iconP1.y = healthBar.y
 			+ (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01))
@@ -5493,6 +5519,10 @@ class PlayState extends MusicBeatState
 					}
 
 					if (health > 0.05 && !daNote.isSustainNote && blackChars.contains(dad.curCharacter) || health > 0.05 && !daNote.isSustainNote && mom.curCharacter == 'blackdk' && opponent2sing || health > 0.05 && !daNote.isSustainNote && mom.curCharacter == 'blackdk' && bothOpponentSing){
+						health -= 0.025;
+					}
+
+					if (health > 0.05 && !daNote.isSustainNote && dtChars.contains(dad.curCharacter)){
 						health -= 0.025;
 					}
 
@@ -6143,11 +6173,11 @@ class PlayState extends MusicBeatState
 					case 'Start Video':
 						startVideo(value1);
 						canPause = false;
-						if (value2 == '0'){
+						if (value2 == 'a'){
 							camHUD.visible = false;
-						}else if (value2 == '1'){
+						}else if (value2 == 'b'){
 							camGame.visible = false;
-						}else if (value2 == '2'){
+						}else if (value2 == 'c'){
 							camHUD.visible = false;
 							camGame.visible = false;
 						}else if (value2 == null){
@@ -6165,12 +6195,18 @@ class PlayState extends MusicBeatState
 							case 'Old Dt':
 								camGame.flash(FlxColor.WHITE, 0.35);
 								addCharacterToList('dt', 1);
+								addCharacterToList('bf-fall1', 0);
+								addCharacterToList('gf-fall1', 2);
 								triggerEventNote('Change Character', '1', 'dt');
+								triggerEventNote('Change Character', '0', 'bf-fall1');
 
-								case 'New Dt':
-									camGame.flash(FlxColor.WHITE, 0.35);
-									addCharacterToList('double-trouble', 1);
-									triggerEventNote('Change Character', '1', 'double-trouble');
+							case 'New Dt':
+								camGame.flash(FlxColor.WHITE, 0.35);
+								addCharacterToList('double-trouble', 1);
+								addCharacterToList('bf-fall', 0);
+								addCharacterToList('gf-fall', 2);
+								triggerEventNote('Change Character', '1', 'double-trouble');
+								triggerEventNote('Change Character', '0', 'bf-fall');
 
 
 					case 'Victory Darkness': //prolly could be done easier but who cares brah
@@ -6532,6 +6568,20 @@ class PlayState extends MusicBeatState
 							if(!gf.alreadyLoaded) {
 								gf.alpha = 1;
 								gf.alreadyLoaded = true;
+							}
+						}
+
+					case 3:
+						if(mom.curCharacter != value2) {
+							if(!momMap.exists(value2)) {
+								addCharacterToList(value2, charType);
+							}
+	
+							mom.visible = false;
+							mom = momMap.get(value2);
+							if(!mom.alreadyLoaded) {
+								mom.alpha = 1;
+								mom.alreadyLoaded = true;
 							}
 						}
 				}
