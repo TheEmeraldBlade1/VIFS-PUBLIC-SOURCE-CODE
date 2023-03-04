@@ -194,6 +194,8 @@ class ShopState extends MusicBeatState
         ['top', 'davep', 'amongbf2', 100000, false, 'Crewmate (Golden)', "", BF],
         ['right', 'blackoldp', '2red_crewmate', 1, false, 'Red Crewmate', "Red's Faking To Be A Crewmate!!!!!!", BF],
         ['right', '2red_crewmate', '0bf', 0, false, 'Zero Boyfriend', "", BF],
+        ['right', '0bf', '0bf2', 0, false, 'Zero Boyfriend Two', "", BF],
+        ['bottom', '0bf2', 'Victory_BF', 150, false, 'Victory Bf', "", BF],
     ];
 
     var root:ShopNode;
@@ -211,6 +213,7 @@ class ShopState extends MusicBeatState
 
         persistentUpdate = true;
         FlxG.mouse.visible = true;
+
         focusTarget = new FlxPoint(0, 0);
 
         //i dont care

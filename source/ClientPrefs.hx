@@ -95,6 +95,9 @@ class ClientPrefs {
 	public static var lastControls:Array<FlxKey> = defaultKeys.copy();
 
 	public static function saveSettings() {
+		FlxG.save.data.charOverrides = charOverrides;
+		FlxG.save.data.boughtArray = boughtArray;
+		FlxG.save.data.beans = beans;
 		FlxG.save.data.speed = speed;
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
@@ -162,6 +165,15 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.charOverrides != null) {
+			charOverrides = FlxG.save.data.charOverrides;
+		}
+		if(FlxG.save.data.boughtArray != null){
+			boughtArray = FlxG.save.data.boughtArray;
+		}
+		if(FlxG.save.data.beans != null){
+			beans = FlxG.save.data.beans;
+		}
 		if(FlxG.save.data.HHHHH != null) {
 			FlxG.fullscreen = FlxG.save.data.HHHHH;
 		}

@@ -39,7 +39,7 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
-	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J', '???', 'EXTRAS'];
+	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J', 'Modded Roles', '???', 'EXTRAS'];
 
 	private var iconArray:Array<HealthIcon> = [];
 
@@ -134,8 +134,11 @@ class FreeplayState extends MusicBeatState
 
 		addSong('WEEK J', 1, ' ', FlxColor.WHITE);
 
+		addSong('voting-time', 1, 'votingtime', FlxColor.RED);
 		addSong('turbulence', 1, 'redmungus', FlxColor.RED);
 		addSong('victory', 1, 'warchief', FlxColor.PURPLE);
+
+		addSong('Modded Roles', 1, ' ', FlxColor.WHITE);
 
 		addSong('???', 1, ' ', FlxColor.BLACK);
 

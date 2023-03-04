@@ -208,6 +208,9 @@ class PauseSubState extends MusicBeatSubstate
 					botplayText.visible = PlayState.cpuControlled;*/
 				/*case 'Simple Score':
 					FlxG.save.data.simplescore = !FlxG.save.data.simplescore;*/
+				case 'Shop':							
+					MusicBeatState.switchState(new ShopState());
+					ShopState.pausemenuEntry = true;
 				case "Exit to menu":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;

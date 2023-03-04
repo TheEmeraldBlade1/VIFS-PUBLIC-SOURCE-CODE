@@ -11,6 +11,8 @@ using StringTools;
 import ShopState.RequirementType;
 import ShopState.SkinType;
 
+import Pet.PetFile;
+
 class ShopNode extends FlxSprite
 {
     public var outline:FlxSprite;
@@ -26,6 +28,7 @@ class ShopNode extends FlxSprite
 
     public var name:String;
     public var charData:CharacterFile;
+    public var petData:PetFile;
 
     public var gotRequirements:Bool = true;
 
@@ -81,7 +84,11 @@ class ShopNode extends FlxSprite
 		overlay.antialiasing = true;
         overlay.updateHitbox();
 
-        {
+        if(skinType == PET){
+            petData = grabPetData(name);
+            _color = FlxColor.fromRGB(petData.healthbar_colors[0], petData.healthbar_colors[1], petData.healthbar_colors[2]);
+            setupIcon('face');
+        }else{
             charData = grabCharData(name);
             _color = FlxColor.fromRGB(charData.healthbar_colors[0], charData.healthbar_colors[1], charData.healthbar_colors[2]);
             setupIcon(charData.healthicon);
@@ -142,12 +149,16 @@ class ShopNode extends FlxSprite
                 || name == 'blackoldp' || name == 'davep'
                 || name == 'minicrewmategreen' || name == 'hamster'
                 || name == 'amongbf2' || name == '2red_crewmate'
-                || name == '0bf'){
+                || name == '0bf' || name == '0bf2' || name == 'Victory_BF'){
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits2', 'impostor');
             }else{
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits', 'impostor');
             }
-            portrait.animation.addByPrefix('guh', name, 0, false);
+            if (name == '0bf2'){
+                portrait.animation.addByPrefix('0bf', name, 0, false);
+            }else{
+                portrait.animation.addByPrefix('guh', name, 0, false);
+            }
             portrait.animation.play('guh');
             portrait.antialiasing = true;
             portrait.updateHitbox();
@@ -203,6 +214,20 @@ class ShopNode extends FlxSprite
 		var rawJson = Assets.getText(path);
 
 		var json:CharacterFile = cast Json.parse(rawJson);
+        return json;
+    }
+
+    function grabPetData(_pet:String):PetFile{
+        var characterPath:String = 'pets/' + _pet + '.json';
+		var path:String = Paths.getPreloadPath(characterPath);
+		if (!Assets.exists(path))
+		{
+			path = Paths.getPreloadPath('pets/crab.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+		}
+
+		var rawJson = Assets.getText(path);
+
+		var json:PetFile = cast Json.parse(rawJson);
         return json;
     }
 }

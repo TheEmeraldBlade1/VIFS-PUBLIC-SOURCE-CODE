@@ -12,6 +12,7 @@ using StringTools;
 
 class Note extends FlxSprite
 {
+	public var row:Int = 0;
 	public var strumTime:Float = 0;
 
 	public var mustPress:Bool = false;
@@ -69,6 +70,10 @@ class Note extends FlxSprite
 
 	public var noAnimation:Bool = false;
 	public var hitCausesMiss:Bool = false;
+
+	public var parentNote:Note;
+	public var childrenNotes:Array<Note> = [];
+	public var endHoldOffset:Float = Math.NEGATIVE_INFINITY;
 
 	private function set_texture(value:String):String {
 		if(texture != value) {
