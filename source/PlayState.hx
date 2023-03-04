@@ -3498,43 +3498,7 @@ class PlayState extends MusicBeatState
 			generateStaticArrows(1);
 			if (ClientPrefs.middleScroll && ClientPrefs.fof)
 				{
-					healthBar.angle += 90;
-					healthBar.screenCenter();
-					healthBar.x += 500;
-					iconP1.x += 1050;
-					iconP2.x += 1050;
-					iconP2.flipX = true;
-					healthBarBG.angle += 90;
-					healthBarBG.x += 500;
-					healthBar.alpha = 0.75;
-					healthBarBG.alpha = 0.75;
-					healthBarOverlay.angle += 90;
-					healthBarOverlay.x += 500;
-					healthBarOverlay.y = healthBarBG.y - 295;
-					if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble'){
-						if (SONG.song.toLowerCase() != 'double trouble'){
-							healthBar.visible = false;
-							healthBarBG.visible = false;
-							healthBarOverlay.visible = false;
-						}
-						if (SONG.song.toLowerCase() == 'double trouble'){
-							//iconP1.visible = false;
-							//iconP2.visible = false;
-							timeBar.visible = false;
-							timeBarBG.visible = false;
-							timeTxt.visible = false;
-							healthBar.alpha = 0.25;
-							healthBarBG.alpha = 0.25;
-							healthBarOverlay.alpha = 0.25;
-							iconP1.alpha = 0.25;
-							iconP2.alpha = 0.25;
-							//scoreTxt.visible = false;
-							scoreTxt.y = timeTxt.y;
-						}
-					}
-				}
-				if (fofStages.contains(curStage) && !ClientPrefs.middleScroll && !ClientPrefs.fof || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof)
-					{
+					if (SONG.song.toLowerCase() != 'double trouble'){
 						healthBar.angle += 90;
 						healthBar.screenCenter();
 						healthBar.x += 500;
@@ -3548,6 +3512,46 @@ class PlayState extends MusicBeatState
 						healthBarOverlay.angle += 90;
 						healthBarOverlay.x += 500;
 						healthBarOverlay.y = healthBarBG.y - 295;
+					}
+					if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble'){
+						if (SONG.song.toLowerCase() != 'double trouble'){
+							healthBar.visible = false;
+							healthBarBG.visible = false;
+							healthBarOverlay.visible = false;
+						}
+						if (SONG.song.toLowerCase() == 'double trouble'){
+							//iconP1.visible = false;
+							//iconP2.visible = false;
+							timeBar.visible = false;
+							timeBarBG.visible = false;
+							timeTxt.visible = false;
+							/*healthBar.alpha = 0.50;
+							healthBarBG.alpha = 0.50;
+							healthBarOverlay.alpha = 0.50;
+							iconP1.alpha = 0.50;
+							iconP2.alpha = 0.50;*/
+							//scoreTxt.visible = false;
+							scoreTxt.y = timeTxt.y;
+						}
+					}
+				}
+				if (fofStages.contains(curStage) && !ClientPrefs.middleScroll && !ClientPrefs.fof || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof)
+					{
+						if (SONG.song.toLowerCase() != 'double trouble'){
+							healthBar.angle += 90;
+							healthBar.screenCenter();
+							healthBar.x += 500;
+							iconP1.x += 1050;
+							iconP2.x += 1050;
+							iconP2.flipX = true;
+							healthBarBG.angle += 90;
+							healthBarBG.x += 500;
+							healthBar.alpha = 0.75;
+							healthBarBG.alpha = 0.75;
+							healthBarOverlay.angle += 90;
+							healthBarOverlay.x += 500;
+							healthBarOverlay.y = healthBarBG.y - 295;
+						}
 						if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble'){
 							if (SONG.song.toLowerCase() != 'double trouble'){
 								healthBar.visible = false;
@@ -3560,11 +3564,11 @@ class PlayState extends MusicBeatState
 								timeBar.visible = false;
 								timeBarBG.visible = false;
 								timeTxt.visible = false;
-								healthBar.alpha = 0.25;
-								healthBarBG.alpha = 0.25;
-								healthBarOverlay.alpha = 0.25;
-								iconP1.alpha = 0.25;
-								iconP2.alpha = 0.25;
+								/*healthBar.alpha = 0.50;
+								healthBarBG.alpha = 0.50;
+								healthBarOverlay.alpha = 0.50;
+								iconP1.alpha = 0.50;
+								iconP2.alpha = 0.50;*/
 								//scoreTxt.visible = false;
 								scoreTxt.y = timeTxt.y;
 							}
