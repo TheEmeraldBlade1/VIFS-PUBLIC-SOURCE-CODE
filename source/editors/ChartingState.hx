@@ -72,7 +72,7 @@ class ChartingState extends MusicBeatState
 	var eventStuff:Array<Dynamic> =
 	[
 		['', "Nothing. Yep, that's right."],
-		['Start Video', "Value 1: Video MP4 File Name\nExampe Ejected\nValue 2 (Optional): Hide game elements\n(0 = hide camhud, 1 = hide game, 2 = both)"],
+		['Start Video', "Value 1: Video MP4 File Name\nExampe Ejected\nValue 2 (Optional): Hide game elements\n(a = hide camhud, b = hide game, c = both)"],
 		['Old Dt', ""],
 		['New Dt', ""],
 		['Alter Camera Bop', '1 : alter intensity\n2 : alter interval'],
