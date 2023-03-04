@@ -91,6 +91,12 @@ class GameOverSubstate extends MusicBeatSubstate
 				MusicBeatState.switchState(new FreeplayMenuState());
 			} else if (PlayState.loadedmenu3) {
 				MusicBeatState.switchState(new MainMenuState());
+			} else if(PlayState.skinnyNuts) {
+				MusicBeatState.switchState(new MainMenuState());
+				PlayState.skinnyNuts = false;
+			} else if(PlayState.skinnyNuts2) {
+				MusicBeatState.switchState(new ShopState());
+				PlayState.skinnyNuts2 = false;
 			} else {
 				MusicBeatState.switchState(new FreeplayState());
 			}
