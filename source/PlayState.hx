@@ -5135,7 +5135,7 @@ class PlayState extends MusicBeatState
 
 		if (ClientPrefs.middleScroll && ClientPrefs.fof)
 			iconOffset = 270;
-		else if (fofStages.contains(curStage) || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof){
+		else if (fofStages.contains(curStage)){
 			iconOffset = 320;
 		}else{
 			iconOffset = 26;
@@ -5152,7 +5152,7 @@ class PlayState extends MusicBeatState
 			- (150 * iconP2.scale.x) / 2
 			- iconOffset;
 		}
-		else if (fofStages.contains(curStage) || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof)
+		else if (fofStages.contains(curStage))
 		{
 			iconP1.y = healthBar.y
 			+ (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01))
