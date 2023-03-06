@@ -80,7 +80,7 @@ class PlayState extends MusicBeatState
 
 	var blackChars:Array<String> = ['black', 'blackdk', 'black-run', 'blackalt', 'blackparasite'];
 
-	var dtChars:Array<String> = ['double-trouble', 'dt'];
+	var dtChars:Array<String> = ['parasite', 'parasiteOld', 'double-trouble', 'dt'];
 
 	var whiteChars:Array<String> = ['white', 'whitedk'];
 
@@ -886,6 +886,8 @@ class PlayState extends MusicBeatState
 				table.antialiasing = true;
 				table.scrollFactor.set(1.0, 1.0);
 				table.active = false;
+
+				cameraLocked = true;
 
 
 				case 'polus3':
@@ -2138,7 +2140,7 @@ class PlayState extends MusicBeatState
 					bfStartpos = new FlxPoint(1008.6, 504);
 					gfStartpos = new FlxPoint(114.4, 78.45);
 					dadStartpos = new FlxPoint(-775.75, 274.3);
-					if (SONG.song.toLowerCase() != 'double trouble'){
+					if (SONG.song.toLowerCase() == 'ejected'){
 						canPause = false;
 						camHUD.visible = false;
 						camGame.visible = false;
@@ -3498,7 +3500,7 @@ class PlayState extends MusicBeatState
 			generateStaticArrows(1);
 			if (ClientPrefs.middleScroll && ClientPrefs.fof)
 				{
-					if (SONG.song.toLowerCase() != 'double trouble'){
+					if (SONG.song.toLowerCase() != 'double trouble' || SONG.song.toLowerCase() != 'ejected'){
 						healthBar.angle += 90;
 						healthBar.screenCenter();
 						healthBar.x += 500;
@@ -3513,13 +3515,13 @@ class PlayState extends MusicBeatState
 						healthBarOverlay.x += 500;
 						healthBarOverlay.y = healthBarBG.y - 295;
 					}
-					if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble'){
-						if (SONG.song.toLowerCase() != 'double trouble'){
+					if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble' || SONG.song.toLowerCase() == 'ejected'){
+						if (SONG.song.toLowerCase() != 'double trouble' || SONG.song.toLowerCase() != 'ejected'){
 							healthBar.visible = false;
 							healthBarBG.visible = false;
 							healthBarOverlay.visible = false;
 						}
-						if (SONG.song.toLowerCase() == 'double trouble'){
+						if (SONG.song.toLowerCase() == 'double trouble' || SONG.song.toLowerCase() == 'ejected'){
 							//iconP1.visible = false;
 							//iconP2.visible = false;
 							timeBar.visible = false;
@@ -3535,9 +3537,9 @@ class PlayState extends MusicBeatState
 						}
 					}
 				}
-				if (fofStages.contains(curStage) && !ClientPrefs.middleScroll && !ClientPrefs.fof || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof)
+				if (fofStages.contains(curStage) && !ClientPrefs.middleScroll && !ClientPrefs.fof || curStage == 'ejected' && SONG.song.toLowerCase() == 'double trouble' && !ClientPrefs.middleScroll && !ClientPrefs.fof || curStage == 'ejected' && SONG.song.toLowerCase() == 'ejected' && !ClientPrefs.middleScroll && !ClientPrefs.fof)
 					{
-						if (SONG.song.toLowerCase() != 'double trouble'){
+						if (SONG.song.toLowerCase() != 'double trouble' && SONG.song.toLowerCase() != 'ejected'){
 							healthBar.angle += 90;
 							healthBar.screenCenter();
 							healthBar.x += 500;
@@ -3552,13 +3554,13 @@ class PlayState extends MusicBeatState
 							healthBarOverlay.x += 500;
 							healthBarOverlay.y = healthBarBG.y - 295;
 						}
-						if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble'){
-							if (SONG.song.toLowerCase() != 'double trouble'){
+						if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble' || SONG.song.toLowerCase() == 'ejected'){
+							if (SONG.song.toLowerCase() != 'double trouble' && SONG.song.toLowerCase() != 'ejected'){
 								healthBar.visible = false;
 								healthBarBG.visible = false;
 								healthBarOverlay.visible = false;
 							}
-							if (SONG.song.toLowerCase() == 'double trouble'){
+							if (SONG.song.toLowerCase() == 'double trouble' && SONG.song.toLowerCase() == 'ejected'){
 								//iconP1.visible = false;
 								//iconP2.visible = false;
 								timeBar.visible = false;
