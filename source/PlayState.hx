@@ -3560,7 +3560,7 @@ class PlayState extends MusicBeatState
 								healthBarBG.visible = false;
 								healthBarOverlay.visible = false;
 							}
-							if (SONG.song.toLowerCase() == 'double trouble' && SONG.song.toLowerCase() == 'ejected'){
+							if (SONG.song.toLowerCase() == 'double trouble' || SONG.song.toLowerCase() == 'ejected'){
 								//iconP1.visible = false;
 								//iconP2.visible = false;
 								timeBar.visible = false;
