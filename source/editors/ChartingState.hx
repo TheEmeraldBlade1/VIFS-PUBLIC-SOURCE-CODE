@@ -75,6 +75,8 @@ class ChartingState extends MusicBeatState
 		['Start Video', "Value 1: Video MP4 File Name\nExampe Ejected\nValue 2 (Optional): Hide game elements\n(a = hide camhud, b = hide game, c = both)"],
 		['Old Dt', ""],
 		['New Dt', ""],
+		['maroon flashback', ""],
+		['maroon normal', ""],
 		['Alter Camera Bop', '1 : alter intensity\n2 : alter interval'],
 		['setChrom', '1 amount, 2 tween speed'],
 		['setGlitch', '1 amount, 2 tween speed'],
