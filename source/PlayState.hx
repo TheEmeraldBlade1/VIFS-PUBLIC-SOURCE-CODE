@@ -72,6 +72,8 @@ class PlayState extends MusicBeatState
 	public var votingnotes:FlxTypedGroup<Note>;
 	public var unspawnVotingNotes:Array<Note> = [];
 
+	private var task:TaskSong;
+
 	var stopEvents:Bool = false;
 
 	public var tweeningChar:Bool = false;
@@ -87,6 +89,11 @@ class PlayState extends MusicBeatState
 	var monotoneChars:Array<String> = ['bfscary', 'monotone', 'attack'];
 
 	var dontoverwritenotetextures:Array<String> = ['Opponent 2 Sing', 'Both Opponents Sing', 'Hurt Note'];
+
+	var sky3:FlxSprite;
+	var rocksbg:FlxSprite;
+	var rocks3:FlxSprite;
+	var ground3:FlxSprite;
 
 	// votingtime
 	var table:FlxSprite;
@@ -171,6 +178,7 @@ class PlayState extends MusicBeatState
 		var lightoverlayDK:FlxSprite;
 		var mainoverlayDK:FlxSprite;
 		var defeatDKoverlay:FlxSprite;
+
 
 	// defeat
 	var defeatthing:FlxSprite;
@@ -987,6 +995,52 @@ class PlayState extends MusicBeatState
 					lavaOverlay.antialiasing = true;
 					lavaOverlay.scrollFactor.set(1, 1);
 
+					sky3 = new FlxSprite(-200, -500).loadGraphic(Paths.image('polus/flashback/SkyPolusLol', 'impostor'));
+					sky3.antialiasing = true;
+					sky3.scrollFactor.set(0.5, 0.5);
+					sky3.active = false;
+					sky3.setGraphicSize(Std.int(sky3.width * 1));
+					add(sky3);		
+					sky3.visible = false;
+
+					rocksbg = new FlxSprite(-250, -400).loadGraphic(Paths.image('polus/flashback/Back_Rocks', 'impostor'));
+					rocksbg.updateHitbox();
+					rocksbg.antialiasing = true;
+					rocksbg.setGraphicSize(Std.int(rocksbg.width * 1));
+					rocksbg.scrollFactor.set(0.7, 0.7);
+					rocksbg.active = false;
+					add(rocksbg);	
+					rocksbg.visible = false;
+	
+					rocks3 = new FlxSprite(-100, 0).loadGraphic(Paths.image('polus/flashback/polus2rocks', 'impostor'));
+					rocks3.updateHitbox();
+					rocks3.antialiasing = true;
+					rocks3.setGraphicSize(Std.int(rocks3.width * 1));
+					rocks3.scrollFactor.set(0.8, 0.8);
+					rocks3.active = false;
+					add(rocks3);	
+					rocks3.visible = false;
+
+					crowd = new FlxSprite(-450, -300);
+					crowd.frames = Paths.getSparrowAtlas('polus/flashback/Specimen_boppers', 'impostor');
+					crowd.animation.addByPrefix('bop', 'Specimen Path Bopping', 24, false);
+					crowd.animation.play('bop');
+					crowd.antialiasing = true;
+					crowd.scrollFactor.set(0.85, 0.85);
+					crowd.setGraphicSize(Std.int(crowd.width * 0.8));
+					crowd.active = true;
+					add(crowd);
+					crowd.visible = false;
+
+					ground3 = new FlxSprite(-300, -100).loadGraphic(Paths.image('polus/flashback/polus2ground', 'impostor'));
+					ground3.updateHitbox();
+					ground3.setGraphicSize(Std.int(ground3.width * 1));
+					ground3.antialiasing = true;
+					ground3.scrollFactor.set(1, 1);
+					ground3.active = false;
+					add(ground3);
+					ground3.visible = false;
+
 					case 'cargo': // double kill
 				var bg:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('airship/cargo', 'impostor'));
 				bg.antialiasing = true;
@@ -1712,7 +1766,7 @@ class PlayState extends MusicBeatState
 					backwall.setGraphicSize(Std.int(backwall.width * 0.75));
 					add(backwall);
 	
-					var stage:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('polus/newstage', 'impostor'));
+					var stage = new FlxSprite(0, 0).loadGraphic(Paths.image('polus/newstage', 'impostor'));
 					stage.antialiasing = true;
 					stage.scrollFactor.set(1, 1);
 					stage.active = false;
@@ -1964,7 +2018,6 @@ class PlayState extends MusicBeatState
 		loBlack.alpha = 0;
 		loBlack.screenCenter(X);
 		loBlack.screenCenter(Y);
-		add(loBlack);
 
 		// Shitty layering but whatev it works LOL
 		if (curStage == 'limo')
@@ -2522,6 +2575,8 @@ class PlayState extends MusicBeatState
 			boyfriendGroup.add(pet);
 		}
 
+		add(loBlack);
+
 		switch(curStage)
 		{
 			case 'limo':
@@ -2671,6 +2726,14 @@ class PlayState extends MusicBeatState
 		noteTypeMap = null;
 		eventPushedMap.clear();
 		eventPushedMap = null;
+
+		if (Assets.exists(Paths.txt(SONG.song.toLowerCase().replace(' ', '-') + "/info")))
+		{
+			trace('it exists');
+			task = new TaskSong(0, 200, SONG.song.toLowerCase().replace(' ', '-'));
+			task.cameras = [camOther];
+			add(task);
+		}
 
 		// After all characters being loaded, it makes then invisible 0.01s later so that the player won't freeze when you change characters
 		// add(strumLine);
@@ -2946,8 +3009,13 @@ class PlayState extends MusicBeatState
 
 	public function reloadHealthBarColors() {
 		if (opponent2sing || bothOpponentSing){
-			healthBar.createFilledBar(FlxColor.fromRGB(mom.healthColorArray[0], mom.healthColorArray[1], mom.healthColorArray[2]),
-			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+			if (bothOpponentSing){
+				healthBar.createFilledBar(FlxColor.fromRGB(mom.healthColorArray[0], dad.healthColorArray[1] + mom.healthColorArray[1], dad.healthColorArray[2]),
+				FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));		
+			}else{
+				healthBar.createFilledBar(FlxColor.fromRGB(mom.healthColorArray[0], mom.healthColorArray[1], mom.healthColorArray[2]),
+				FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+			}
 			healthBar.updateBar();
 		}else{
 			healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
@@ -2958,8 +3026,13 @@ class PlayState extends MusicBeatState
 
 	public function reloadTimeBarColors() {
 		if (opponent2sing || bothOpponentSing){
-			timeBar.createFilledBar(FlxColor.fromRGB(mom.healthColorArray[0], mom.healthColorArray[1], mom.healthColorArray[2]),
-			FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+			if (bothOpponentSing){
+				timeBar.createFilledBar(FlxColor.fromRGB(mom.healthColorArray[0], dad.healthColorArray[1] + mom.healthColorArray[1], dad.healthColorArray[2]),
+				FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+			}else{
+				timeBar.createFilledBar(FlxColor.fromRGB(mom.healthColorArray[0], mom.healthColorArray[1], mom.healthColorArray[2]),
+				FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+			}
 			timeBar.updateBar();
 		}else{
 			timeBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
@@ -3635,10 +3708,10 @@ class PlayState extends MusicBeatState
 						dad.dance();
 					}
 					if (mom.animation.curAnim != null && !mom.animation.curAnim.name.startsWith('sing') && !mom.stunned)
-						{
+					{
 							mom.dance();
-						}
 					}
+				}
 					else if (dad.danceIdle
 						&& dad.animation.curAnim != null
 						&& !dad.stunned
@@ -6103,6 +6176,86 @@ class PlayState extends MusicBeatState
 									iconP2.visible = false;
 									scoreTxt.visible = false;
 							}
+
+							case 'Cam lock in Who':
+								if (value1 == 'in')
+								{
+									defaultCamZoom = 1.2;
+									camGame.camera.zoom = 1.2;
+									cameraLocked = true;
+									if (value2 == 'dad')
+									{
+										camFollowPos.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y + 150);
+										FlxG.camera.focusOn(camFollowPos.getPosition());
+									}
+									else
+									{
+										camFollowPos.setPosition(boyfriend.getMidpoint().x - 150, boyfriend.getMidpoint().y + 150);
+										FlxG.camera.focusOn(camFollowPos.getPosition());
+									}
+								}
+								else
+								{
+									cameraLocked = true;
+									defaultCamZoom = 0.7;
+									FlxG.camera.zoom = 0.7;
+									camFollowPos.setPosition(1100, 1150);
+									FlxG.camera.focusOn(camFollowPos.getPosition());
+								}
+
+					case 'Cam lock in Voting Time':
+					if (value1 == 'in')
+					{
+						defaultCamZoom = 1.2;
+						camGame.camera.zoom = 1.2;
+						cameraLocked = true;
+						if (value2 == 'dad')
+						{
+							camFollowPos.setPosition(460, 700);
+							FlxG.camera.focusOn(camFollowPos.getPosition());
+							iconP2.changeIcon(dad.healthIcon);
+							healthBar.createFilledBar(FlxColor.fromRGB(dad.healthColorArray[0], dad.healthColorArray[1], dad.healthColorArray[2]),
+							FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+							healthBar.updateBar();
+						}
+						else
+						{
+							camFollowPos.setPosition(1470, 700);
+							FlxG.camera.focusOn(camFollowPos.getPosition());
+						}
+					}
+					else if (value1 == 'close')
+					{
+						defaultCamZoom = 1.25;
+						camGame.camera.zoom = 1.25;
+						cameraLocked = true;
+						if (value2 == 'dad')
+						{
+							camFollowPos.setPosition(480, 680);
+							FlxG.camera.focusOn(camFollowPos.getPosition());
+							iconP2.changeIcon(gf.healthIcon);
+							healthBar.createFilledBar(FlxColor.fromRGB(gf.healthColorArray[0], gf.healthColorArray[1], gf.healthColorArray[2]),
+							FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+							healthBar.updateBar();
+						}
+						else
+						{
+							camFollowPos.setPosition(1450, 680);
+							FlxG.camera.focusOn(camFollowPos.getPosition());
+							iconP2.changeIcon(mom.healthIcon);
+							healthBar.createFilledBar(FlxColor.fromRGB(mom.healthColorArray[0], mom.healthColorArray[1], mom.healthColorArray[2]),
+							FlxColor.fromRGB(boyfriend.healthColorArray[0], boyfriend.healthColorArray[1], boyfriend.healthColorArray[2]));
+							healthBar.updateBar();
+						}
+					}
+					else
+					{
+						cameraLocked = true;
+						defaultCamZoom = 0.7;
+						FlxG.camera.zoom = 0.7;
+						camFollowPos.setPosition(960, 540);
+						FlxG.camera.focusOn(camFollowPos.getPosition());
+					}
 				
 				case 'Lights Down OFF':
 					camGame.visible = false;
@@ -6172,6 +6325,7 @@ class PlayState extends MusicBeatState
 							camGame.flash(FlxColor.RED, 2.75);
 							mom.alpha = 0;
 							boyfriend.alpha = 0;
+							pet.alpha = 0;
 							camHUD.visible = false;
 							defeatDKoverlay.alpha = 0;
 					}
@@ -6213,6 +6367,30 @@ class PlayState extends MusicBeatState
 								addCharacterToList('gf-fall', 2);
 								triggerEventNote('Change Character', '1', 'double-trouble');
 								triggerEventNote('Change Character', '0', 'bf-fall');
+
+								case 'maroon flashback':
+									camGame.flash(FlxColor.WHITE, 0.35);
+									sky3.visible = true;
+									ground3.visible = true;
+									rocksbg.visible = true;
+									rocks3.visible = true;
+
+									addCharacterToList('maroon_flashback', 1);
+									triggerEventNote('Change Character', '1', 'maroon_flashback');
+									addCharacterToList('bf', 0);
+									triggerEventNote('Change Character', '0', 'bf');
+
+									case 'maroon normal':
+										camGame.flash(FlxColor.WHITE, 0.35);
+										sky3.visible = false;
+										ground3.visible = false;
+										rocksbg.visible = false;
+										rocks3.visible = false;
+	
+										addCharacterToList('maroonp', 1);
+										triggerEventNote('Change Character', '1', 'maroonp');
+										addCharacterToList('bf-lava', 0);
+										triggerEventNote('Change Character', '0', 'bf-lava');
 
 
 					case 'Victory Darkness': //prolly could be done easier but who cares brah
