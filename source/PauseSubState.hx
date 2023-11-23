@@ -77,7 +77,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelDifficulty);
 
 		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		blueballedTxt.text = "Blueballed: " + PlayState.deathCounter;
+		blueballedTxt.text = "Blueballed: " + PlayState.deathCounter + "\nPress ESC To\n	Close";
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -154,6 +154,12 @@ class PauseSubState extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
+		if (controls.BACK){
+			curSelected = 0;
+			changeSelection(0);
+			closeState();
+		}
+
 		if (accepted)
 		{
 			var daSelected:String = menuItems[curSelected];
@@ -187,21 +193,41 @@ class PauseSubState extends MusicBeatSubstate
 					CustomFadeTransition.nextCamera = transCamera;
 					MusicBeatState.resetState();
 					FlxG.sound.music.volume = 0;
-				case 'Preferences':
-					for (item in grpMenuShit.members) {
-						item.alpha =  0.50;
-					}									
-					openSubState(new OptionsState.PreferencesSubstate());
 				case 'Controls':
 					for (item in grpMenuShit.members) {
 						item.alpha = 0.50;
 					}									
 					openSubState(new OptionsState.ControlsSubstate());
-				case 'Notes':
+				case 'Graphics':
 					for (item in grpMenuShit.members) {
-						item.alpha = 0.50;
+						item.alpha =  0.50;
 					}									
-					openSubState(new OptionsState.NotesSubstate());
+					openSubState(new OptionsState.PreferencesSubstate());
+					case 'Gameplay':
+						for (item in grpMenuShit.members) {
+							item.alpha =  0.50;
+						}									
+						openSubState(new OptionsState.GameplayOptionSubstate());
+						case 'Hud':
+							for (item in grpMenuShit.members) {
+								item.alpha =  0.50;
+							}									
+							openSubState(new OptionsState.HudOptionsSubstate());
+							case 'Score Text':
+								for (item in grpMenuShit.members) {
+									item.alpha =  0.50;
+								}									
+								openSubState(new OptionsState.ScoreTxtOptionsSubstate());
+								case 'Notes':
+									for (item in grpMenuShit.members) {
+										item.alpha =  0.50;
+									}									
+									openSubState(new OptionsState.NoteSplashOptionsSubstate());
+									case 'Others':
+										for (item in grpMenuShit.members) {
+											item.alpha =  0.50;
+										}									
+										openSubState(new OptionsState.SoundOptionsSubstate());
 				/*case 'Botplay':
 					PlayState.cpuControlled = !PlayState.cpuControlled;
 					PlayState.usedPractice = true;
@@ -265,7 +291,7 @@ class PauseSubState extends MusicBeatSubstate
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 
 		if (curSelected < 0)
-			curSelected = menuItems.length - 1;
+			curSelected = menuItems.length - 8;
 		if (curSelected >= menuItems.length)
 			curSelected = 0;
 
@@ -303,18 +329,23 @@ class PauseSubState extends MusicBeatSubstate
 	var daTime:Float = 0.5;
 	function closeState()
 	{	
+		Main.unPaused = true;
 		var da:Int = curSelected;
 		FlxG.sound.play(Paths.sound('confirmMenu'));
 		for (i in 0...grpMenuShit.members.length)
 		{
 			if (i == da)
 			{
+				Main.unPaused = true;
 				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
+				Main.unPaused = true;
 			}
 		}
 		new FlxTimer().start(daTime, function(tmr:FlxTimer)
 		{
+			Main.unPaused = true;
 			close();
+			Main.unPaused = true;
 		});
 	}
 }

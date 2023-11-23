@@ -89,7 +89,7 @@ class ShopState extends MusicBeatState
 
     var upperBar:FlxSprite;
     var crossImage:FlxSprite;
-    var skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk:FlxSprite;
+    public var skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk:FlxSprite;
 
     // top bar
 
@@ -181,8 +181,8 @@ class ShopState extends MusicBeatState
         ['bottom', '1mungus', 'blackdkp', 5000, false, 'Black (Double Kill)', "", BF],
         ['bottom', 'blackdkp', 'bf-defeat-normal', 10000, false, 'Defeat Bf (Normal)', "", BF],
         ['bottom', 'bf-defeat-normal', 'bf-defeat-scared', 15000, false, 'Defeat Bf (Scared)', "", BF],
-        ['bottom', 'bf-defeat-scared', 'cerbera', 20000, false, 'Cerbera', "That Femboy Charter\nBut why is He Here Though???", BF],
-        ['bottom', 'cerbera', 'clowfoe', 20000, false, 'Clowfoe', "You Already Know", BF],
+        //['bottom', 'bf-defeat-scared', 'cerbera', 20000, false, 'Cerbera', "That Femboy Charter\nBut why is He Here Though???", BF],
+        ['bottom', 'bf-defeat-scared', 'clowfoe', 20000, false, 'Clowfoe', "You Already Know", BF],
         ['bottom', 'elliepet', 'elliep', 300, false, 'Ellie', "", BF],
         ['right', 'clowfoe', 'picolobby', 375, false, 'Pico', "", BF],
         ['right', 'picolobby', 'powersp', 375, false, 'Powers', "", BF],
@@ -196,6 +196,10 @@ class ShopState extends MusicBeatState
         ['right', '2red_crewmate', '0bf', 0, false, 'Zero Boyfriend', "", BF],
         ['right', '0bf', '0bf2', 0, false, 'Zero Boyfriend Two', "", BF],
         ['bottom', '0bf2', 'Victory_BF', 150, false, 'Victory Bf', "", BF],
+        ['bottom', 'Victory_BF', 'bfminus', 0, false, 'Minus Bf', "", BF],
+        ['bottom', 'bfminus', 'bf-old', 0, false, 'Minus Old Bf', "", BF],
+        ['bottom', 'bf-old', 'bf-mean', 0, false, 'Mean Bf', "", BF],
+        ['right', 'bf-mean', 'bf-mean2', 0, false, 'Mean Bf 2nd Icons', "", BF],
     ];
 
     var root:ShopNode;
@@ -203,6 +207,75 @@ class ShopState extends MusicBeatState
     override function create()
 	{
 		super.create();
+
+        if (Main.debugBuild){
+            nodeData = [
+                ['bottom', 'root', 'redp', 125, false, 'Red', '', BF],
+                ['right', 'redp', 'greenp', 250, false, 'Green', '', BF],
+                ['right', 'greenp', 'blackp', 450, false, 'Black', "", BF],
+                ['top', 'blackp', 'amongbf', 400, false, 'Crewmate', "", BF],
+                ['bottom', 'redp', 'bfg', 200, false, 'Ghost BF', "", BF],
+                ['right', 'bfg', 'ghostgf', 450, false, 'Ghost GF', "", GF],
+                ['top', 'root', 'bfpolus', 175, false, 'Polus BF', '', BF],
+                ['right', 'root', 'dripbf', 225, false, 'Drippypop BF', '', BF],
+                ['right', 'bfpolus', 'bfmira', 225, false, 'Mira BF', '', BF],
+                ['left', 'bfpolus', 'bfairship', 200, false, 'Airship BF', '', BF],
+                ['right', 'bfmira', 'gfmira', 250, false, 'Mira GF', '', GF],
+                ['top', 'bfmira', 'bfsauce', 250, false, 'Chef BF', '', BF],
+        
+                ['top', 'bfpolus', 'gfpolus', 450, false, 'Polus GF', "", GF],
+                ['top', 'gfpolus', 'snowball', 300, false, 'Snowball', "i dont even know man", PET],
+                ['right', 'bfsauce', 'ham', 300, false, 'Hammy', "its like a ham but with legs", PET],
+        
+                ['bottom', 'bfg', 'dog', 300, false, 'Doggy', "man(?)'s best friend!", PET],
+                ['bottom', 'ghostgf', 'frankendog', 300, false, 'Frankendog', "spooky ass dog", PET],
+        
+                ['left', 'redp', 'minicrewmate', 300, false, 'Crewmate', "your very own child", PET],
+                ['left', 'minicrewmate', 'tomong', 300, false, 'Tomongus', "he's not among us, he's a hamster!", PET],
+        
+                ['top', 'bfairship', 'crab', 300, false, 'Bedcrab', "the thing from half life", PET],
+                ['left', 'crab', 'ufo', 300, false, 'UFO', "aliens ahh", PET],
+        
+                
+                ['left', 'root', 'stick-bf', 375, false, 'Stickmin BF', "", BF],
+                ['left', 'stick-bf', 'henrygf', 375, false, 'Stickmin GF', "", GF],
+        
+                ['top', 'henrygf', 'stickmin', 300, false, 'H. Stickmin', "a tiny henry?", PET],
+                ['left', 'stickmin', 'elliepet', 300, false, 'E. Rose', "and an ellie too!", PET],
+                ['left', 'elliepet', 'pretender', 999, false, 'Pink', "She's a Demigirl", BF],
+                ['bottom', 'pretender', 'blackparasitep', 0, false, 'Black Parasite', "...", BF],
+                ['left', 'blackparasitep', 'yellowp', 300, false, 'Yellow', "", BF],
+                ['left', 'yellowp', 'henryplayer', 350, false, 'Henry', "", BF],
+                ['top', 'henryplayer', 'henryphone', 400, false, 'Henry Phone', "", BF],
+                ['left', 'henryphone', 'pinkplayable', 450, false, 'Pink Happy', "", BF],
+                ['left', 'pinkplayable', 'bfsusreal', 500, false, 'Imposter Bf', "", BF],
+                ['top', 'bfsusreal', 'jorsawseep', 550, false, 'Jorsawsee', "", BF],
+                ['left', 'jorsawseep', 'greyp', 600, false, 'Grey', "", BF],
+                ['left', 'greyp', '1mungus', 650, false, 'Red Mungus', "Fly High Cooper Fly High", BF],
+                ['bottom', '1mungus', 'blackdkp', 5000, false, 'Black (Double Kill)', "", BF],
+                ['bottom', 'blackdkp', 'bf-defeat-normal', 10000, false, 'Defeat Bf (Normal)', "", BF],
+                ['bottom', 'bf-defeat-normal', 'bf-defeat-scared', 15000, false, 'Defeat Bf (Scared)', "", BF],
+                ['bottom', 'bf-defeat-scared', 'cerbera', 20000, false, 'Cerbera', "That Femboy Charter\nBut why is He Here Though???", BF],
+                ['bottom', 'cerbera', 'clowfoe', 20000, false, 'Clowfoe', "You Already Know", BF],
+                ['bottom', 'elliepet', 'elliep', 300, false, 'Ellie', "", BF],
+                ['right', 'clowfoe', 'picolobby', 375, false, 'Pico', "", BF],
+                ['right', 'picolobby', 'powersp', 375, false, 'Powers', "", BF],
+                ['right', 'powersp', 'powers_saxp', 375, false, 'Powers (Sax)', "", BF],
+                ['right', 'powers_saxp', 'blackoldp', 375, false, 'Black (Old)', "", BF],
+                ['top', 'blackoldp', 'davep', 952, false, 'Dave', "", BF],
+                ['left', 'davep', 'minicrewmategreen', 69, false, 'Crewmate (Green)', "your very own child but green", PET],
+                ['right', 'davep', 'hamster', 843, false, 'Hamster', "he's a hamster!", PET],
+                ['top', 'davep', 'amongbf2', 100000, false, 'Crewmate (Golden)', "", BF],
+                ['right', 'blackoldp', '2red_crewmate', 1, false, 'Red Crewmate', "Red's Faking To Be A Crewmate!!!!!!", BF],
+                ['right', '2red_crewmate', '0bf', 0, false, 'Zero Boyfriend', "", BF],
+                ['right', '0bf', '0bf2', 0, false, 'Zero Boyfriend Two', "", BF],
+                ['bottom', '0bf2', 'Victory_BF', 150, false, 'Victory Bf', "", BF],
+                ['bottom', 'Victory_BF', 'bfminus', 0, false, 'Minus Bf', "", BF],
+                ['bottom', 'bfminus', 'bf-old', 0, false, 'Minus Old Bf', "", BF],
+                ['bottom', 'bf-old', 'bf-mean', 0, false, 'Mean Bf', "", BF],
+                ['right', 'bf-mean', 'bf-mean2', 0, false, 'Mean Bf 2nd Icons', "", BF],
+            ];
+        }
 
 		Paths.clearUnusedMemory();
 
@@ -347,7 +420,7 @@ class ShopState extends MusicBeatState
 		upperBar.cameras = [camUpper];
 		add(upperBar);
 
-		crossImage = new FlxSprite(12.50, 8.05).loadGraphic(Paths.image('freeplay/menuBack', 'impostor'));
+		/*crossImage = new FlxSprite(12.50, 8.05).loadGraphic(Paths.image('freeplay/menuBack', 'impostor'));
 		crossImage.antialiasing = true;
 		crossImage.scrollFactor.set();
 		crossImage.updateHitbox();
@@ -356,9 +429,9 @@ class ShopState extends MusicBeatState
         FlxMouseEventManager.add(crossImage, function onMouseDown(s:FlxSprite)
 		{
 			goBack();
-		}, null, null);
+		}, null, null);*/
 
-        skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk = new FlxSprite(12.50, 8.05).loadGraphic(Paths.image('shop/ziffyButton', 'impostor'));
+        /*skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk = new FlxSprite(12.50, 8.05).loadGraphic(Paths.image('shop/ziffyButton', 'impostor'));
 		skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk.antialiasing = true;
 		skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk.scrollFactor.set();
 		skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk.updateHitbox();
@@ -382,7 +455,7 @@ class ShopState extends MusicBeatState
 
         if (FlxG.save.data.unlockedSkinnyNuts2){
             skinnyNuts2TheRealAnywaysTimeTomakeThisVarEXTREMLYLONGfsdklhfgdshlksdfhfghskjfsdjgfhhjgfdskhfjgjkdsajkgljkldfshjfdkdjlfldfsjk.visible = true;
-        }
+        }*/
 
 
 		topBean = new FlxSprite(30, 100).loadGraphic(Paths.image('shop/bean', 'impostor'));

@@ -146,9 +146,11 @@ class FreeplayState extends MusicBeatState
 
 		addSong('EXTRAS', 1, ' ', FlxColor.WHITE);
 
-		addSong('drippypop', 1, 'drippy', FlxColor.WHITE);
-		addSong('sauces-moogus', 1, 'chef', FlxColor.WHITE);
+		addSong('drippypop', 1, 'drippy', FlxColor.PURPLE);
+		addSong('sauces-moogus', 1, 'chef', FlxColor.ORANGE);
 		addSong('who', 1, 'whoguys', FlxColor.WHITE);
+		addSong('Fight Or Flight', 1, 'lime', FlxColor.LIME);
+		addSong('Escape From The City', 1, 'sonic', FlxColor.BLUE);
 
 		// LOAD CHARACTERS
 
@@ -322,15 +324,15 @@ class FreeplayState extends MusicBeatState
 			vocals.looped = true;
 			vocals.volume = 0.7;
 			instPlaying = curSelected;*/
-			openSubState(new OptionsState.PreferencesSubstate());
+			//openSubState(new OptionsState.PreferencesSubstate());
 		}
 		else if(FlxG.keys.justPressed.CONTROL)
 		{
-			openSubState(new OptionsState.ControlsSubstate());
+			//openSubState(new OptionsState.ControlsSubstate());
 		}
 		else if(FlxG.keys.justPressed.ALT)
 		{
-			openSubState(new OptionsState.NotesSubstate());
+			//openSubState(new OptionsState.NotesSubstate());
 		}
 		else if (accepted)
 		{

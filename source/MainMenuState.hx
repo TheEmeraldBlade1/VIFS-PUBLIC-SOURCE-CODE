@@ -287,10 +287,10 @@ class MainMenuState extends MusicBeatState
 				PlayState.skinnyNuts = true;
 				LoadingState.loadAndSwitchState(new PlayState(), true);
 			}
-			if (controls.BACK)
+			/*if (controls.BACK)
 			{
 				FlxG.switchState(new TitleState());
-			}
+			}*/
 		}
 
 		super.update(elapsed);
@@ -358,7 +358,12 @@ class MainMenuState extends MusicBeatState
 				FlxG.mouse.visible = false;
 				FlxG.switchState(new OptionsState());
 				trace("Options Menu Selected");
-			case 'Beans' | 'Credits':
+			case 'Beans':
+				ClientPrefs.beans = 0;
+				FlxG.save.data.beans = 0;
+				ClientPrefs.saveSettings();
+				FlxG.switchState(new MainMenuState());
+			case 'Credits':
 				ClientPrefs.saveSettings();
 				FlxG.switchState(new MainMenuState());
 			case 'Shop':

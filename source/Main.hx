@@ -20,6 +20,7 @@ class Main extends Sprite
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPS;
 	public static var debugBuild:Bool = true;
+	public static var unPaused:Bool = false;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 

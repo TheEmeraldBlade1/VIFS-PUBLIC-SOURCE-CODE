@@ -76,6 +76,8 @@ class StrumNote extends FlxSprite
 				frames = Paths.getSparrowAtlas('monotone_notes');
 			}else if (PlayState.SONG.player1 == 'Victory_BF' && player == 1){
 				frames = Paths.getSparrowAtlas('NOTE_assets_DEFAULT_COLOR2');
+			}else if (PlayState.SONG.player1 == 'amongbf2' && player == 1){
+				frames = Paths.getSparrowAtlas('NOTE_assets_DEFAULT_COLOR2');
 			}else{
 				frames = Paths.getSparrowAtlas(skin);
 				if (Circles.circles) frames = Paths.getSparrowAtlas('circle/' + skin);

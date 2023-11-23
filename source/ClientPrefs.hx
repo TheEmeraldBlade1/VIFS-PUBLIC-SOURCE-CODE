@@ -48,12 +48,22 @@ class ClientPrefs {
 	public static var aFlipY:Bool = false;
 	public static var aFlipX:Bool = false;
 	public static var botca:Bool = true;
+	public static var fastBotcaFrames:Bool = false;
+	public static var fastBotcaFrames2:Bool = false;
+	public static var fastBotcaFrames23:Bool = false;
+	public static var overRidebfDebug:Bool = false;
+	public static var overRidegfDebug:Bool = false;
+	public static var overRidepetDebug:Bool = false;
 	public static var safeFrame:Int = 8;
+
+	public static var watermark:Bool = false;
+	public static var hidescoretxt:Bool = false;
+	public static var hideiconp1:Bool = false;
+	public static var hideiconp2:Bool = false;
 
 	public static var charOverrides:Array<String> = ['', '', ''];
 	public static var beans:Int = 0;
-	public static var boughtArray:Array<Bool> = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
-	// should be enough if u add more stuff fuck you >:(
+	public static var boughtArray:Array<Bool> = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 
 	// SONG MODS
 	public static var loopsong:Bool = false;
@@ -95,6 +105,17 @@ class ClientPrefs {
 	public static var lastControls:Array<FlxKey> = defaultKeys.copy();
 
 	public static function saveSettings() {
+		FlxG.save.data.watermark = watermark;
+		FlxG.save.data.hidescoretxt = hidescoretxt;
+		FlxG.save.data.hideiconp1 = hideiconp1;
+		FlxG.save.data.hideiconp2 = hideiconp2;
+
+		FlxG.save.data.overRidebfDebug = overRidebfDebug;
+		FlxG.save.data.overRidegfDebug = overRidegfDebug;
+		FlxG.save.data.overRidepetDebug = overRidepetDebug;
+		FlxG.save.data.fastBotcaFrames = fastBotcaFrames;
+		FlxG.save.data.fastBotcaFrames2 = fastBotcaFrames2;
+		FlxG.save.data.fastBotcaFrames23 = fastBotcaFrames23;
 		FlxG.save.data.charOverrides = charOverrides;
 		FlxG.save.data.boughtArray = boughtArray;
 		FlxG.save.data.beans = beans;
@@ -163,8 +184,42 @@ class ClientPrefs {
 		save.flush();
 		FlxG.log.add("Settings saved!");
 	}
-
+	//FlxG.save.data.watermark = watermark;
+	//FlxG.save.data.hidescoretxt = hidescoretxt;
+	//FlxG.save.data.hideiconp1 = hideiconp1;
+	//FlxG.save.data.hideiconp2 = hideiconp2;
 	public static function loadPrefs() {
+		if(FlxG.save.data.watermark != null) {
+			watermark = FlxG.save.data.watermark;
+		}
+		if(FlxG.save.data.hidescoretxt != null) {
+			hidescoretxt = FlxG.save.data.hidescoretxt;
+		}
+		if(FlxG.save.data.hideiconp1 != null) {
+			hideiconp1 = FlxG.save.data.hideiconp1;
+		}
+		if(FlxG.save.data.hideiconp2 != null) {
+			hideiconp2 = FlxG.save.data.hideiconp2;
+		}
+		
+		if(FlxG.save.data.overRidebfDebug != null) {
+			overRidebfDebug = FlxG.save.data.overRidebfDebug;
+		}
+		if(FlxG.save.data.overRidegfDebug != null) {
+			overRidegfDebug = FlxG.save.data.overRidegfDebug;
+		}
+		if(FlxG.save.data.overRidepetDebug != null) {
+			overRidepetDebug = FlxG.save.data.overRidepetDebug;
+		}
+		if(FlxG.save.data.fastBotcaFrames != null) {
+			fastBotcaFrames = FlxG.save.data.fastBotcaFrames;
+		}
+		if(FlxG.save.data.fastBotcaFrames2 != null) {
+			fastBotcaFrames2 = FlxG.save.data.fastBotcaFrames2;
+		}
+		if(FlxG.save.data.fastBotcaFrames23 != null) {
+			fastBotcaFrames23 = FlxG.save.data.fastBotcaFrames23;
+		}
 		if(FlxG.save.data.charOverrides != null) {
 			charOverrides = FlxG.save.data.charOverrides;
 		}

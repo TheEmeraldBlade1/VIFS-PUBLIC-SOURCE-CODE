@@ -29,6 +29,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
+import flash.system.System;
 
 #if sys
 import sys.FileSystem;
@@ -301,12 +302,19 @@ class TitleState extends MusicBeatState
 			Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
 
-		if (FlxG.keys.justPressed.F)
+		if (FlxG.save.data.HHHHH && FlxG.fullscreen == false)
 		{
-			FlxG.fullscreen = !FlxG.fullscreen;
+			FlxG.fullscreen = true;
+		}
+		else
+		{
+			FlxG.fullscreen = false;
 		}
 
-		
+
+		if (FlxG.keys.justPressed.ESCAPE){
+			System.exit(0);
+		}
 
 		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
 
