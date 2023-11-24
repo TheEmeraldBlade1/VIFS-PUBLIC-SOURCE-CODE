@@ -105,12 +105,16 @@ class Note extends FlxSprite
 					}
 					hitCausesMiss = true;
 				case 'Opponent 2 Sing':
-					reloadNote('BHURT');
+					if (PlayState.SONG.player4 == 'blackdk' && PlayState.SONG.player2 == 'whitedk'){
+						reloadNote('BHURT');
+					}
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
 				case 'Both Opponents Sing':
-					reloadNote('DKHURT');
+					if (PlayState.SONG.player4 == 'blackdk'){
+						reloadNote('DKHURT');
+					}
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;

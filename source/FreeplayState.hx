@@ -39,7 +39,7 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
-	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J', 'Modded Roles', '???', 'EXTRAS'];
+	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J', 'Modded Roles', '???', 'EXTRAS', 'HENRY'];
 
 	private var iconArray:Array<HealthIcon> = [];
 
@@ -143,10 +143,22 @@ class FreeplayState extends MusicBeatState
 		addSong('???', 1, ' ', FlxColor.BLACK);
 
 		addSong('Defeat', 1, 'black', FlxColor.BLACK);
+		addSong('Ominous', 1, 'black', FlxColor.BLACK);
+		addSong('Finale', 1, 'black', FlxColor.BLACK);
+		addSong('True Finale', 1, 'black', FlxColor.BLACK);
+		addSong('Final Finale', 1, 'black', FlxColor.BLACK);
+
+		addSong('HENRY', 1, ' ', FlxColor.WHITE);
+
+		addSong('titular', 1, 'henry', FlxColor.GRAY);
+		addSong('greatest-plan', 1, 'charles', FlxColor.GRAY);
+		addSong('reinforcements', 1, 'ellie', FlxColor.GRAY);
+		addSong('armed', 1, 'rhm', FlxColor.GRAY);
 
 		addSong('EXTRAS', 1, ' ', FlxColor.WHITE);
 
 		addSong('drippypop', 1, 'drippy', FlxColor.PURPLE);
+		//addSong('Your Mother', 1, 'drippy', FlxColor.PURPLE); // spy tf2
 		addSong('sauces-moogus', 1, 'chef', FlxColor.ORANGE);
 		addSong('who', 1, 'whoguys', FlxColor.WHITE);
 		addSong('Fight Or Flight', 1, 'lime', FlxColor.LIME);

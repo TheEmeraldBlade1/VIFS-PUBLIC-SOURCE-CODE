@@ -63,7 +63,10 @@ class ClientPrefs {
 
 	public static var charOverrides:Array<String> = ['', '', ''];
 	public static var beans:Int = 0;
-	public static var boughtArray:Array<Bool> = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+	public static var boughtArray:Array<Bool> = [false, false, false, false, false, false, false, false, false, 
+		false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
+		false, false, false, false, false, false, false, false, false, false, false, false
+	];
 
 	// SONG MODS
 	public static var loopsong:Bool = false;

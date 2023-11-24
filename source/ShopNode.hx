@@ -152,7 +152,8 @@ class ShopNode extends FlxSprite
                 || name == '0bf' || name == '0bf2' || name == 'Victory_BF'){
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits2', 'impostor');
             }else if (name == 'bf-mean'
-            || name == 'bf-mean2' || name == 'bfminus' || name == 'bf-old'){
+            || name == 'bf-mean2' || name == 'bfminus' || name == 'bf-old'
+            || name == 'whitewho' || name == 'whitemad'){
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits3', 'impostor');
             }else{
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits', 'impostor');

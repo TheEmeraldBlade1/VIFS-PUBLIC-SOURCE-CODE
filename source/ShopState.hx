@@ -200,6 +200,8 @@ class ShopState extends MusicBeatState
         ['bottom', 'bfminus', 'bf-old', 0, false, 'Minus Old Bf', "", BF],
         ['bottom', 'bf-old', 'bf-mean', 0, false, 'Mean Bf', "", BF],
         ['right', 'bf-mean', 'bf-mean2', 0, false, 'Mean Bf 2nd Icons', "", BF],
+        ['right', 'bf-mean2', 'whitewho', 450, false, 'Mean Bf', "", BF],
+        ['right', 'whitewho', 'whitemad', 675, false, 'Mean Bf 2nd Icons', "", BF],
     ];
 
     var root:ShopNode;
@@ -274,6 +276,8 @@ class ShopState extends MusicBeatState
                 ['bottom', 'bfminus', 'bf-old', 0, false, 'Minus Old Bf', "", BF],
                 ['bottom', 'bf-old', 'bf-mean', 0, false, 'Mean Bf', "", BF],
                 ['right', 'bf-mean', 'bf-mean2', 0, false, 'Mean Bf 2nd Icons', "", BF],
+                ['right', 'bf-mean2', 'whitewho', 450, false, 'White (Who)', "", BF],
+                ['right', 'whitewho', 'whitemad', 675, false, 'White (Mad)', "", BF],
             ];
         }
 

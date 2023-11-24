@@ -28,12 +28,16 @@ class PauseSubState extends MusicBeatSubstate
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
 	var botplayText:FlxText;
+	var canEscape:Bool;
 
 	public static var transCamera:FlxCamera;
 
 	public function new(x:Float, y:Float)
 	{
 		super();
+		
+		canEscape = true;
+
 		menuItemsOG = CoolUtil.coolTextFile(Paths.txt('pausemenu'));
 		menuItems = menuItemsOG;
 
@@ -154,9 +158,10 @@ class PauseSubState extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (controls.BACK){
+		if (controls.BACK && canEscape){
 			curSelected = 0;
 			changeSelection(0);
+			canEscape = false;
 			closeState();
 		}
 
@@ -272,7 +277,10 @@ class PauseSubState extends MusicBeatSubstate
 					menuItems = menuItemsOG;
 					regenMenu();
 				default:
-					closeState();
+					if (canEscape){
+						canEscape = false;
+						closeState();
+					}
 			}
 		}
 	}
@@ -326,7 +334,7 @@ class PauseSubState extends MusicBeatSubstate
 		curSelected = 0;
 		changeSelection();
 	}
-	var daTime:Float = 0.5;
+	var daTime:Float = 0.9;
 	function closeState()
 	{	
 		Main.unPaused = true;

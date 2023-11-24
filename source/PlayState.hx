@@ -78,6 +78,11 @@ class PlayState extends MusicBeatState
 
 	public var tweeningChar:Bool = false;
 
+		//armed
+		var armedGuy:FlxSprite;
+		var dustcloud:FlxSprite;
+		var armedDark:FlxSprite;
+
 	var fofStages:Array<String> = ['monochrome', 'esculent', 'nuzzus', 'limeStarved'];
 
 	var blackChars:Array<String> = ['black', 'blackdk', 'black-run', 'blackalt', 'blackparasite'];
@@ -1087,6 +1092,33 @@ class PlayState extends MusicBeatState
 				bg.scrollFactor.set(1, 1);
 				bg.active = false;
 				add(bg);
+
+				
+			case 'henry': // stick Min
+				var bg:BGSprite = new BGSprite('stagehenry', -1600, -300, 1, 1);
+				add(bg);
+
+			if(SONG.song.toLowerCase() == 'reinforcements'){
+				trace('enry');
+
+				armedGuy = new FlxSprite(-800, -300);
+				armedGuy.frames = Paths.getSparrowAtlas('henry/i_schee_u_enry', 'impostor');
+				armedGuy.animation.addByPrefix('crash', 'rhm intro shadow', 16, false);
+				armedGuy.antialiasing = true;
+				armedGuy.alpha = 0.001;
+			}
+			if(SONG.song.toLowerCase() == 'armed' && isStoryMode){
+				trace('enry');
+
+				armedDark = new FlxSprite(-300).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+				armedDark.alpha = 0;
+				add(armedDark);
+
+				dustcloud = new FlxSprite(120, 450);
+				dustcloud.frames = Paths.getSparrowAtlas('henry/Dust_Cloud', 'impostor');
+				dustcloud.animation.addByPrefix('dust', 'dust clouds', 24, false);
+				dustcloud.antialiasing = true;
+			}
 
 				case 'chef': // mayhew has gone mad
 				var wall:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('chef/Back Wall Kitchen', 'impostor'));
@@ -5036,9 +5068,9 @@ class PlayState extends MusicBeatState
 		if (simplescore)
 		{
 			scoreTxt.text = 'Score: ';
-			/*if (PlayState.SONG.stage.toLowerCase() == 'victory'){
+			if (PlayState.SONG.stage.toLowerCase() == 'victory'){
 				scoreTxt.text += "Who cares? You already won!";
-			}else*/{
+			}else{
 				scoreTxt.text += songScore;
 			}
 			scoreTxt.text += ' ';
@@ -5089,9 +5121,9 @@ class PlayState extends MusicBeatState
 		else
 		{
 			scoreTxt.text = 'Score: ';
-			/*if (PlayState.SONG.stage.toLowerCase() == 'victory'){
+			if (PlayState.SONG.stage.toLowerCase() == 'victory'){
 				scoreTxt.text += "Who cares? You already won!";
-			}else*/{
+			}else{
 				scoreTxt.text += songScore;
 			}
 			if (PlayState.SONG.stage.toLowerCase() != 'victory'){
@@ -6388,6 +6420,14 @@ class PlayState extends MusicBeatState
 	
 					case 'Turbulence Speed':
 						turbSpeed = Std.parseFloat(value1);
+
+						case 'Ellie Drop':
+							add(momGroup);
+							dad.playAnim('shock', false);
+							dad.specialAnim = true;
+							mom.playAnim('enter', false);
+							mom.specialAnim = true;
+							iconP2.changeIcon('ellie');
 
 						case 'chromToggle':
 							var theAmount:Float = Std.parseFloat(value1);
