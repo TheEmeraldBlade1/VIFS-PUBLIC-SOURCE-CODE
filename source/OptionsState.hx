@@ -2096,7 +2096,6 @@ class HudOptionsSubstate extends MusicBeatSubstate
 
 	static var options:Array<String> = [
 		'Hide HealthBar',
-		'Hide ScoreTxt',
 		'Hide Icon Player 1',
 		'Hide Icon Player 2',
 		'Hide Watermark',
@@ -2263,9 +2262,6 @@ class HudOptionsSubstate extends MusicBeatSubstate
 
 					case 'Low Quality':
 						ClientPrefs.lowQuality = !ClientPrefs.lowQuality;
-
-					case 'Hide ScoreTxt':
-						ClientPrefs.hidescoretxt = !ClientPrefs.hidescoretxt;
 
 					case 'Hide Icon Player 1':
 						ClientPrefs.hideiconp1 = !ClientPrefs.hideiconp1;
@@ -2669,8 +2665,6 @@ class HudOptionsSubstate extends MusicBeatSubstate
 						daValue = ClientPrefs.camZooms2;
 					case 'Hide HealthBar':
 						daValue = ClientPrefs.hideHud;
-					case 'Hide ScoreTxt':
-						daValue = ClientPrefs.hidescoretxt;
 					case 'Hide Icon Player 1':
 						daValue = ClientPrefs.hideiconp1;
 					case 'Hide Icon Player 2':
@@ -2796,6 +2790,7 @@ class ScoreTxtOptionsSubstate extends MusicBeatSubstate
 	];
 
 	static var options:Array<String> = [
+		'Hide ScoreTxt',
 		'Score Zooms',
 		'Transparent Score Text',
 		'Acc Rating',
@@ -2954,6 +2949,10 @@ class ScoreTxtOptionsSubstate extends MusicBeatSubstate
 		if(usesCheckbox) {
 			if(controls.ACCEPT && nextAccept <= 0) {
 				switch(options[curSelected]) {
+
+					case 'Hide ScoreTxt':
+						ClientPrefs.hidescoretxt = !ClientPrefs.hidescoretxt;
+
 					case 'FPS Counter':
 						ClientPrefs.showFPS = !ClientPrefs.showFPS;
 						if(Main.fpsVar != null)
@@ -3325,6 +3324,8 @@ class ScoreTxtOptionsSubstate extends MusicBeatSubstate
 			if(checkbox != null) {
 				var daValue:Bool = false;
 				switch(options[checkboxNumber[i]]) {
+					case 'Hide ScoreTxt':
+						daValue = ClientPrefs.hidescoretxt;
 					case 'FPS Counter':
 						daValue = ClientPrefs.showFPS;
 					case 'Low Quality':
@@ -3479,7 +3480,6 @@ class NoteSplashOptionsSubstate extends MusicBeatSubstate
 		'Enemy Note Splashes',
 		'Fast Confirm Anims',
 		'Fast Enemy Confirm Anims',
-		'Transparent Enemy Notes',
 		'Hide Enemy Notes',
 		'Note Size',
 		'Flip Arrow Y',
