@@ -65,7 +65,7 @@ class ClientPrefs {
 	public static var beans:Int = 0;
 	public static var boughtArray:Array<Bool> = [false, false, false, false, false, false, false, false, false, 
 		false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-		false, false, false, false, false, false, false, false, false, false, false, false
+		false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
 	];
 
 	// SONG MODS

@@ -153,7 +153,8 @@ class ShopNode extends FlxSprite
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits2', 'impostor');
             }else if (name == 'bf-mean'
             || name == 'bf-mean2' || name == 'bfminus' || name == 'bf-old'
-            || name == 'whitewho' || name == 'whitemad'){
+            || name == 'whitewho' || name == 'whitemad'
+            || name == 'bluewhop' || name == 'bluemadp' || name == 'GFm'){
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits3', 'impostor');
             }else{
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits', 'impostor');
