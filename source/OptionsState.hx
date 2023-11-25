@@ -178,9 +178,9 @@ class NotesSubstate extends MusicBeatSubstate
 			}
 
 			var note:FlxSprite = new FlxSprite(posX - 70, yPos);
-			if (Circles.circles)
+			/*if (Circles.circles)
 				note.frames = Paths.getSparrowAtlas('circle/NOTE_assets');
-			else
+			else*/
 				note.frames = Paths.getSparrowAtlas('NOTE_assets');
 			switch(i) {
 				case 0:
@@ -3483,8 +3483,8 @@ class NoteSplashOptionsSubstate extends MusicBeatSubstate
 		'Hide Enemy Notes',
 		'Note Size',
 		'Flip Arrow Y',
-		'Flip Arrow X',
-		'Circle Notes'
+		'Flip Arrow X'
+		//'Circle Notes'
 	];
 
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -3508,12 +3508,10 @@ class NoteSplashOptionsSubstate extends MusicBeatSubstate
 				'Fast Enemy Confirm Anims',
 				'Botplay Confirm Anims',
 				'Fast Botplay Confirm Anims',
-				'Transparent Enemy Notes',
 				'Hide Enemy Notes',
 				'Note Size',
 				'Flip Arrow Y',
-				'Flip Arrow X',
-				'Circle Notes'
+				'Flip Arrow X'
 			];
 		}
 		// avoids lagspikes while scrolling through menus!

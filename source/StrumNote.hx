@@ -33,11 +33,11 @@ class StrumNote extends FlxSprite
 		if(PlayState.isPixelStage)
 		{
 			loadGraphic(Paths.image('pixelUI/' + skin + 'STATIC'));
-			if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + skin + 'STATIC'));
+			//if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + skin + 'STATIC'));
 			width = width / 4;
 			height = height / 5;
 			loadGraphic(Paths.image('pixelUI/' + skin + 'STATIC'), true, Math.floor(width), Math.floor(height));
-			if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + skin + 'STATIC'), true, Math.floor(width), Math.floor(height));
+			//if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + skin + 'STATIC'), true, Math.floor(width), Math.floor(height));
 			animation.add('green', [6]);
 			animation.add('red', [7]);
 			animation.add('blue', [5]);
@@ -74,13 +74,16 @@ class StrumNote extends FlxSprite
 		{
 			if (monotoneChars.contains(PlayState.SONG.player2) && player == 0){
 				frames = Paths.getSparrowAtlas('monotone_notes');
+				//if (Circles.circles) frames = Paths.getSparrowAtlas('circle/monotone_notes');
 			}else if (PlayState.SONG.player1 == 'Victory_BF' && player == 1){
 				frames = Paths.getSparrowAtlas('NOTE_assets_DEFAULT_COLOR2');
+				//if (Circles.circles) frames = Paths.getSparrowAtlas('circle/NOTE_assets_DEFAULT_COLOR2');
 			}else if (PlayState.SONG.player1 == 'amongbf2' && player == 1){
 				frames = Paths.getSparrowAtlas('NOTE_assets_DEFAULT_COLOR2');
+				//if (Circles.circles) frames = Paths.getSparrowAtlas('circle/NOTE_assets_DEFAULT_COLOR2');
 			}else{
 				frames = Paths.getSparrowAtlas(skin);
-				if (Circles.circles) frames = Paths.getSparrowAtlas('circle/' + skin);
+				//if (Circles.circles) frames = Paths.getSparrowAtlas('circle/' + skin);
 			}
 			animation.addByPrefix('green', 'arrowUP');
 			animation.addByPrefix('blue', 'arrowDOWN');

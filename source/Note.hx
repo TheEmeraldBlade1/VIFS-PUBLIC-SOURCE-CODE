@@ -266,25 +266,25 @@ class Note extends FlxSprite
 		if(PlayState.isPixelStage) {
 			if(isSustainNote) {
 				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'));
-				if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah + 'ENDS'));
+				//if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah + 'ENDS'));
 				width = width / 4;
 				height = height / 2;
 				loadGraphic(Paths.image('pixelUI/' + blahblah + 'ENDS'), true, Math.floor(width), Math.floor(height));
-				if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah + 'ENDS'), true, Math.floor(width), Math.floor(height));
+				//if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah + 'ENDS'), true, Math.floor(width), Math.floor(height));
 			} else {
 				loadGraphic(Paths.image('pixelUI/' + blahblah));
-				if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah));
+				//if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah));
 				width = width / 4;
 				height = height / 5;
 				loadGraphic(Paths.image('pixelUI/' + blahblah), true, Math.floor(width), Math.floor(height));
-				if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah), true, Math.floor(width), Math.floor(height));
+				//if (Circles.circles) loadGraphic(Paths.image('pixelUI/circle/' + blahblah), true, Math.floor(width), Math.floor(height));
 			}
 			setGraphicSize(Std.int(width * ClientPrefs.noteSize * PlayState.daPixelZoom * 1.5));
 			loadPixelNoteAnims();
 			antialiasing = false;
 		} else {
 			frames = Paths.getSparrowAtlas(blahblah);
-			if (Circles.circles) frames = Paths.getSparrowAtlas('circle/' + blahblah);
+			//if (Circles.circles) frames = Paths.getSparrowAtlas('circle/' + blahblah);
 			loadNoteAnims();
 			antialiasing = ClientPrefs.globalAntialiasing;
 		}

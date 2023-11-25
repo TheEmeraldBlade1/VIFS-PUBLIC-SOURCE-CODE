@@ -83,7 +83,9 @@ class PlayState extends MusicBeatState
 		var dustcloud:FlxSprite;
 		var armedDark:FlxSprite;
 
-	var fofStages:Array<String> = ['monochrome', 'esculent', 'nuzzus', 'limeStarved'];
+	var noMissBf:Array<String> = ['Victory_BF'];
+
+	var fofStages:Array<String> = ['monochrome', 'esculent', 'nuzzus', 'limeStarved', 'LostFever'];
 
 	var blackChars:Array<String> = ['black', 'blackdk', 'black-run', 'blackalt', 'blackparasite'];
 
@@ -7823,13 +7825,9 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.misss)
 			FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
 
-		if (dad.animation.curAnim.name.startsWith('sing'))
+		if (dad.animation.curAnim.name.startsWith('sing') || gf.animation.curAnim.name.startsWith('sing') || mom.animation.curAnim.name.startsWith('sing'))
 			vocals.volume = ClientPrefs.vocalsVolume;
-		else if (gf.animation.curAnim.name.startsWith('sing'))
-			vocals.volume = ClientPrefs.vocalsVolume;
-		else if (dad.animation.curAnim.name.startsWith('hey'))
-			vocals.volume = ClientPrefs.vocalsVolume;
-		else if (gf.animation.curAnim.name.startsWith('hey'))
+		else if (dad.animation.curAnim.name.startsWith('hey') || gf.animation.curAnim.name.startsWith('hey'))
 			vocals.volume = ClientPrefs.vocalsVolume;
 		else
 			vocals.volume = 0;
@@ -7838,8 +7836,9 @@ class PlayState extends MusicBeatState
 
 		if (funnimode)
 			songScore = 0;
-		else
+		else if (songScore > 0 || songScore2 > 0){
 			songScore -= 500;
+		}
 
 		var animToPlay:String = '';
 		if (boyfriend.animation.getByName("singLEFTmiss") != null && boyfriend.animation.getByName("singUPmiss") != null && boyfriend.animation.getByName("singDOWNmiss") != null && boyfriend.animation.getByName("singRIGHTmiss") != null)
@@ -7859,16 +7858,30 @@ class PlayState extends MusicBeatState
 		else
 		{
 			boyfriend.color = 0xFF000084;
-			switch (Math.abs(daNote.noteData) % 4)
-			{
-				case 0:
-					animToPlay = 'singLEFT';
-				case 1:
-					animToPlay = 'singDOWN';
-				case 2:
-					animToPlay = 'singUP';
-				case 3:
-					animToPlay = 'singRIGHT';
+			if (noMissBf.contains(SONG.player1)){
+				switch (Math.abs(daNote.noteData) % 4)
+				{
+					case 0:
+						animToPlay = 'singLEFT';
+					case 1:
+						animToPlay = 'singDOWN';
+					case 2:
+						animToPlay = 'singUP';
+					case 3:
+						animToPlay = 'singRIGHT';
+				}
+			}else{
+				switch (Math.abs(daNote.noteData) % 4)
+				{
+					case 0:
+						animToPlay = 'singRIGHT';
+					case 1:
+						animToPlay = 'singDOWN';
+					case 2:
+						animToPlay = 'singUP';
+					case 3:
+						animToPlay = 'singLEFT';
+				}
 			}
 		}
 
@@ -7909,16 +7922,30 @@ class PlayState extends MusicBeatState
 						else
 						{
 							boyfriend.color = 0xFF000084;
-							switch (direction)
-							{
-								case 0:
-									boyfriend.playAnim('singLEFT', true);
-								case 1:
-									boyfriend.playAnim('singDOWN', true);
-								case 2:
-									boyfriend.playAnim('singUP', true);
-								case 3:
-									boyfriend.playAnim('singRIGHT', true);
+							if (noMissBf.contains(SONG.player1)){
+								switch (direction)
+								{
+									case 0:
+										boyfriend.playAnim('singLEFT', true);
+									case 1:
+										boyfriend.playAnim('singDOWN', true);
+									case 2:
+										boyfriend.playAnim('singUP', true);
+									case 3:
+										boyfriend.playAnim('singRIGHT', true);
+								}
+							}else{
+								switch (direction)
+								{
+									case 0:
+										boyfriend.playAnim('singRIGHT', true);
+									case 1:
+										boyfriend.playAnim('singDOWN', true);
+									case 2:
+										boyfriend.playAnim('singUP', true);
+									case 3:
+										boyfriend.playAnim('singLEFT', true);
+								}
 							}
 						}
 					}
@@ -7949,16 +7976,30 @@ class PlayState extends MusicBeatState
 							else
 							{
 								boyfriend.color = 0xFF000084;
-								switch (Math.abs(daNote.noteData) % 4)
-								{
-									case 0:
-										animToPlay = 'singLEFT';
-									case 1:
-										animToPlay = 'singDOWN';
-									case 2:
-										animToPlay = 'singUP';
-									case 3:
-										animToPlay = 'singRIGHT';
+								if (noMissBf.contains(SONG.player1)){
+									switch (Math.abs(daNote.noteData) % 4)
+									{
+										case 0:
+											animToPlay = 'singLEFT';
+										case 1:
+											animToPlay = 'singDOWN';
+										case 2:
+											animToPlay = 'singUP';
+										case 3:
+											animToPlay = 'singRIGHT';
+									}
+								}else{
+									switch (Math.abs(daNote.noteData) % 4)
+									{
+										case 0:
+											animToPlay = 'singRIGHT';
+										case 1:
+											animToPlay = 'singDOWN';
+										case 2:
+											animToPlay = 'singUP';
+										case 3:
+											animToPlay = 'singLEFT';
+									}
 								}
 							}
 					}
@@ -8015,16 +8056,30 @@ class PlayState extends MusicBeatState
 						else
 						{
 							boyfriend.color = 0xFF000084;
-							switch (direction)
-							{
-								case 0:
-									boyfriend.playAnim('singLEFT', true);
-								case 1:
-									boyfriend.playAnim('singDOWN', true);
-								case 2:
-									boyfriend.playAnim('singUP', true);
-								case 3:
-									boyfriend.playAnim('singRIGHT', true);
+							if (noMissBf.contains(SONG.player1)){
+								switch (direction)
+								{
+									case 0:
+										boyfriend.playAnim('singLEFT', true);
+									case 1:
+										boyfriend.playAnim('singDOWN', true);
+									case 2:
+										boyfriend.playAnim('singUP', true);
+									case 3:
+										boyfriend.playAnim('singRIGHT', true);
+								}
+							}else{
+								switch (direction)
+								{
+									case 0:
+										boyfriend.playAnim('singRIGHT', true);
+									case 1:
+										boyfriend.playAnim('singDOWN', true);
+									case 2:
+										boyfriend.playAnim('singUP', true);
+									case 3:
+										boyfriend.playAnim('singLEFT', true);
+								}
 							}
 						}
 					}
@@ -8100,16 +8155,44 @@ class PlayState extends MusicBeatState
 				if(note.noteType == 'Alt Animation') daAlt = '-alt';
 	
 				var animToPlay:String = '';
-				switch (Std.int(Math.abs(note.noteData)))
-				{
-					case 0:
-						animToPlay = 'singLEFT';
-					case 1:
-						animToPlay = 'singDOWN';
-					case 2:
-						animToPlay = 'singUP';
-					case 3:
-						animToPlay = 'singRIGHT';
+				if (boyfriend.animation.getByName("singLEFTmiss") != null && boyfriend.animation.getByName("singUPmiss") != null && boyfriend.animation.getByName("singDOWNmiss") != null && boyfriend.animation.getByName("singRIGHTmiss") != null){
+					switch (Std.int(Math.abs(note.noteData)))
+					{
+						case 0:
+							animToPlay = 'singLEFT';
+						case 1:
+							animToPlay = 'singDOWN';
+						case 2:
+							animToPlay = 'singUP';
+						case 3:
+							animToPlay = 'singRIGHT';
+					}
+				}else{
+					if (noMissBf.contains(SONG.player1)){
+						switch (Std.int(Math.abs(note.noteData)))
+						{
+							case 0:
+								animToPlay = 'singLEFT';
+							case 1:
+								animToPlay = 'singDOWN';
+							case 2:
+								animToPlay = 'singUP';
+							case 3:
+								animToPlay = 'singRIGHT';
+						}
+					}else{
+						switch (Std.int(Math.abs(note.noteData)))
+						{
+							case 0:
+								animToPlay = 'singRIGHT';
+							case 1:
+								animToPlay = 'singDOWN';
+							case 2:
+								animToPlay = 'singUP';
+							case 3:
+								animToPlay = 'singLEFT';
+						}
+					}
 				}
 
 				if(note.noteType == 'GF Sing') {

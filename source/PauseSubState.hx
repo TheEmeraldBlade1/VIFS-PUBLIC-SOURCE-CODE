@@ -74,14 +74,14 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelInfo);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
-		levelDifficulty.text += CoolUtil.difficultyString();
+		levelDifficulty.text = "Blueballed: " + PlayState.deathCounter;
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('vcr.ttf'), 32);
 		levelDifficulty.updateHitbox();
 		add(levelDifficulty);
 
 		var blueballedTxt:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		blueballedTxt.text = "Blueballed: " + PlayState.deathCounter + "\nPress ESC To\n	Close";
+		blueballedTxt.text = "Press ESC To\nClose";
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -124,7 +124,6 @@ class PauseSubState extends MusicBeatSubstate
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, menuItems[i], true, false);
 			songText.isMenuItem = true;
 			songText.targetY = i;
-			songText.screenCenter(X);
 			grpMenuShit.add(songText);
 		}
 
@@ -309,10 +308,10 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			item.targetY = bullShit - curSelected;
 			bullShit++;
-
+	
 			item.alpha = 0.6;
 			// item.setGraphicSize(Std.int(item.width * 0.8));
-
+	
 			if (item.targetY == 0)
 			{
 				item.alpha = 1;
@@ -345,7 +344,9 @@ class PauseSubState extends MusicBeatSubstate
 			if (i == da)
 			{
 				Main.unPaused = true;
-				FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
+				if (ClientPrefs.flashing){
+					FlxFlicker.flicker(grpMenuShit.members[i], 1, 0.06, false, false);
+				}
 				Main.unPaused = true;
 			}
 		}

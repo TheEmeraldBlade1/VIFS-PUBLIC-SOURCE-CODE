@@ -349,7 +349,8 @@ class MainMenuState extends MusicBeatState
 		switch (daChoice)
 		{
 			case 'Story Mode':
-				FlxG.switchState(new StoryMenuState());
+				FreeplayState.storymenu = true;
+				FlxG.switchState(new FreeplayState());
 				trace("Story Menu Selected");
 			case 'Freeplay':
 				FlxG.switchState(new FreeplayState());

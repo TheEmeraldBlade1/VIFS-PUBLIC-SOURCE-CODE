@@ -39,7 +39,12 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 
-	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J', 'Modded Roles', '???', 'EXTRAS', 'HENRY'];
+	public static var storymenu:Bool = false;
+
+	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J'
+	, 'Modded Roles', '???', 'EXTRAS', 'HENRY'
+	, 'The Skinny Nuts Saga', 'Forever Gone', ''
+	];
 
 	private var iconArray:Array<HealthIcon> = [];
 
@@ -92,77 +97,107 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD MUSIC
 
-		addSong('WEEK 1', 1, ' ', FlxColor.WHITE);
+		if (storymenu){
+			addSong('Polus Problems', 1, 'impostor', FlxColor.WHITE);
+			addSong('Mira Mania', 1, 'crewmate', FlxColor.WHITE);
+			addSong('Airship Atrocities', 1, 'yellow', FlxColor.WHITE);
+			addSong('Magmatic Monstrosity', 1, 'maroon', FlxColor.WHITE);
+			addSong('Deadly Delusion', 1, 'gray', FlxColor.WHITE);
+			addSong('Humane Heartbeat', 1, 'pink', FlxColor.WHITE);
+			addSong("Jorsawsee's Jams", 1, 'jorsawsee', FlxColor.WHITE);
+			addSong('Battling the Boyfriend', 1, 'henry', FlxColor.WHITE);
+			addSong('Rousey Rival', 1, 'tomongus', FlxColor.WHITE);
+			addSong("Loggo's Halloween", 1, 'fella', FlxColor.WHITE);
+			addSong("Loggo's Halloween DX+", 1, 'loggo', FlxColor.WHITE);
+			addSong('Jads Jams', 1, 'jads', FlxColor.WHITE);
+			addSong('???', 1, 'black', FlxColor.WHITE);
+		}else{
+			addSong('WEEK 1', 1, ' ', FlxColor.WHITE);
 
-		addSong('sussus-moogus', 1, 'impostor', FlxColor.RED);
-		addSong('sabotage', 1, 'impostor', FlxColor.RED);
-		addSong('meltdown', 1, 'impostor2', FlxColor.RED);
+			addSong('sussus-moogus', 1, 'impostor', FlxColor.RED);
+			addSong('sabotage', 1, 'impostor', FlxColor.RED);
+			addSong('meltdown', 1, 'impostor2', FlxColor.RED);
+	
+			addSong('WEEK 2', 1, ' ', FlxColor.WHITE);
+	
+			addSong('sussus-toogus', 1, 'crewmate', FlxColor.GREEN);
+			addSong('lights-down', 1, 'impostor3', FlxColor.GREEN);
+			addSong('reactor', 1, 'impostor3', FlxColor.GREEN);
+			addSong('ejected', 1, 'parasite', FlxColor.GREEN);
+			addSong('double-trouble', 1, 'dt', FlxColor.GREEN);
+	
+			addSong('WEEK 3', 1, ' ', FlxColor.WHITE);
+	
+			addSong('mando', 1, 'yellow', FlxColor.YELLOW);
+			addSong('dlow', 1, 'yellow', FlxColor.YELLOW);
+			addSong('oversight', 1, 'white', FlxColor.WHITE);
+			addSong('Danger', 1, 'black', FlxColor.BLACK);
+			addSong('Double-Kill', 1, 'whiteblack', FlxColor.BLACK);
+	
+			addSong('WEEK 5', 1, ' ', FlxColor.WHITE);
+	
+			addSong('Ashes', 1, 'maroon', FlxColor.fromRGB(82,35,47));
+			addSong('Stealth', 1, 'maroon', FlxColor.fromRGB(82,35,47));
+			addSong('Magmatic', 1, 'maroon', FlxColor.fromRGB(82,35,47));
+			addSong('Boiling-Point', 1, 'boilingpoint', FlxColor.fromRGB(82,35,47));
+	
+			addSong('WEEK 6', 1, ' ', FlxColor.WHITE);
+	
+			addSong('Delusion', 1, 'gray', FlxColor.GRAY);
+			addSong('Insane', 1, 'gray', FlxColor.GRAY);
+			addSong('Blackout', 1, 'gray', FlxColor.GRAY);
+			addSong('Neurotic', 1, 'gray', FlxColor.GRAY);
+	
+			addSong('WEEK 7', 1, ' ', FlxColor.WHITE);
+	
+			addSong('pretender', 1, 'pretender', FlxColor.GRAY);
+	
+			addSong('WEEK J', 1, ' ', FlxColor.WHITE);
+	
+			addSong('voting-time', 1, 'votingtime', FlxColor.RED);
+			addSong('turbulence', 1, 'redmungus', FlxColor.RED);
+			addSong('victory', 1, 'warchief', FlxColor.PURPLE);
+	
+			addSong('Modded Roles', 1, ' ', FlxColor.WHITE);
+	
+			addSong('???', 1, ' ', FlxColor.BLACK);
+	
+			addSong('Defeat', 1, 'black', FlxColor.BLACK);
+			addSong('Ominous', 1, 'black', FlxColor.BLACK);
+			addSong('Finale', 1, 'black', FlxColor.BLACK);
+			addSong('True Finale', 1, 'black', FlxColor.BLACK);
+			addSong('Final Finale', 1, 'black', FlxColor.BLACK);
+			addSong('Final Fates Of Destiny', 1, 'black', FlxColor.BLACK);
+	
+			addSong('HENRY', 1, ' ', FlxColor.WHITE);
+	
+			addSong('titular', 1, 'henry', FlxColor.GRAY);
+			addSong('greatest-plan', 1, 'charles', FlxColor.GRAY);
+			addSong('reinforcements', 1, 'ellie', FlxColor.GRAY);
+			addSong('armed', 1, 'rhm', FlxColor.GRAY);
+	
+			addSong('The Skinny Nuts Saga', 1, ' ', FlxColor.WHITE);
+	
+			addSong('Skinny Nuts', 1, 'skinnynuts', FlxColor.WHITE);
+			addSong('Skinny Nuts 2', 1, 'skinnynuts', FlxColor.WHITE);
+	
+			addSong('EXTRAS', 1, ' ', FlxColor.WHITE);
+	
+			addSong('drippypop', 1, 'drippy', FlxColor.PURPLE);
+			//addSong('Your Mother', 1, 'drippy', FlxColor.PURPLE); // spy tf2
+			addSong('sauces-moogus', 1, 'chef', FlxColor.ORANGE);
+			addSong('who', 1, 'whoguys', FlxColor.WHITE);
+			addSong('Fight Or Flight', 1, 'lime', FlxColor.LIME);
+			addSong('Escape From The City', 1, 'sonic', FlxColor.BLUE);
 
-		addSong('WEEK 2', 1, ' ', FlxColor.WHITE);
+			//addSong("Loggo's Halloween DX +", 1, 'loggo', FlxColor.GREEN);
 
-		addSong('sussus-toogus', 1, 'crewmate', FlxColor.GREEN);
-		addSong('lights-down', 1, 'impostor3', FlxColor.GREEN);
-		addSong('reactor', 1, 'impostor3', FlxColor.GREEN);
-		addSong('ejected', 1, 'parasite', FlxColor.GREEN);
-		addSong('double-trouble', 1, 'dt', FlxColor.GREEN);
+			addSong('Defeat Old', 1, 'blackold', FlxColor.BLACK);
 
-		addSong('WEEK 3', 1, ' ', FlxColor.WHITE);
+			addSong('Forever Gone', 1, ' ', FlxColor.WHITE);
 
-		addSong('mando', 1, 'yellow', FlxColor.YELLOW);
-		addSong('dlow', 1, 'yellow', FlxColor.YELLOW);
-		addSong('oversight', 1, 'white', FlxColor.WHITE);
-		addSong('Danger', 1, 'black', FlxColor.BLACK);
-		addSong('Double-Kill', 1, 'whiteblack', FlxColor.BLACK);
-
-		addSong('WEEK 5', 1, ' ', FlxColor.WHITE);
-
-		addSong('Ashes', 1, 'maroon', FlxColor.fromRGB(82,35,47));
-		addSong('Stealth', 1, 'maroon', FlxColor.fromRGB(82,35,47));
-		addSong('Magmatic', 1, 'maroon', FlxColor.fromRGB(82,35,47));
-		addSong('Boiling-Point', 1, 'boilingpoint', FlxColor.fromRGB(82,35,47));
-
-		addSong('WEEK 6', 1, ' ', FlxColor.WHITE);
-
-		addSong('Delusion', 1, 'gray', FlxColor.GRAY);
-		addSong('Insane', 1, 'gray', FlxColor.GRAY);
-		addSong('Blackout', 1, 'gray', FlxColor.GRAY);
-		addSong('Neurotic', 1, 'gray', FlxColor.GRAY);
-
-		addSong('WEEK 7', 1, ' ', FlxColor.WHITE);
-
-		addSong('pretender', 1, 'pretender', FlxColor.GRAY);
-
-		addSong('WEEK J', 1, ' ', FlxColor.WHITE);
-
-		addSong('voting-time', 1, 'votingtime', FlxColor.RED);
-		addSong('turbulence', 1, 'redmungus', FlxColor.RED);
-		addSong('victory', 1, 'warchief', FlxColor.PURPLE);
-
-		addSong('Modded Roles', 1, ' ', FlxColor.WHITE);
-
-		addSong('???', 1, ' ', FlxColor.BLACK);
-
-		addSong('Defeat', 1, 'black', FlxColor.BLACK);
-		addSong('Ominous', 1, 'black', FlxColor.BLACK);
-		addSong('Finale', 1, 'black', FlxColor.BLACK);
-		addSong('True Finale', 1, 'black', FlxColor.BLACK);
-		addSong('Final Finale', 1, 'black', FlxColor.BLACK);
-
-		addSong('HENRY', 1, ' ', FlxColor.WHITE);
-
-		addSong('titular', 1, 'henry', FlxColor.GRAY);
-		addSong('greatest-plan', 1, 'charles', FlxColor.GRAY);
-		addSong('reinforcements', 1, 'ellie', FlxColor.GRAY);
-		addSong('armed', 1, 'rhm', FlxColor.GRAY);
-
-		addSong('EXTRAS', 1, ' ', FlxColor.WHITE);
-
-		addSong('drippypop', 1, 'drippy', FlxColor.PURPLE);
-		//addSong('Your Mother', 1, 'drippy', FlxColor.PURPLE); // spy tf2
-		addSong('sauces-moogus', 1, 'chef', FlxColor.ORANGE);
-		addSong('who', 1, 'whoguys', FlxColor.WHITE);
-		addSong('Fight Or Flight', 1, 'lime', FlxColor.LIME);
-		addSong('Escape From The City', 1, 'sonic', FlxColor.BLUE);
+			addSong('Lost Fever', 1, 'black', FlxColor.BLUE);
+		}
 
 		// LOAD CHARACTERS
 
@@ -206,6 +241,10 @@ class FreeplayState extends MusicBeatState
 		add(diffText);
 
 		add(scoreText);
+		
+		scoreText.visible = false;
+		scoreBG.visible = false;
+		diffText.visible = false;
 
 		if(curSelected >= songs.length) curSelected = 0;
 		bg.color = songs[curSelected].color;
@@ -314,6 +353,10 @@ class FreeplayState extends MusicBeatState
 			if(colorTween != null) {
 				colorTween.cancel();
 			}
+			if (storymenu){
+				storymenu = false;
+			}
+			curSelected = 0;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
 		}
@@ -349,32 +392,65 @@ class FreeplayState extends MusicBeatState
 		else if (accepted)
 		{
 			if (!weeks.contains(songs[curSelected].songName)){
-				var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
-				var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
-				#if MODS_ALLOWED
-				if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
-				#else
-				if(!OpenFlAssets.exists(Paths.json(songLowercase + '/' + poop))) {
-				#end
-					poop = songLowercase;
-					curDifficulty = 2;
-					trace('Couldnt find file');
+				if (songs[curSelected].songName == "Lost Fever"){
+					/*var lostfever:String = "lost-fever";
+					var unknown:String = "unknown";*/
+					var songLowercase:String = Paths.formatToSongPath("unknown");
+					var poop:String = Highscore.formatSong("lost-fever", 2);
+					#if MODS_ALLOWED
+					if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
+					#else
+					if(!OpenFlAssets.exists(Paths.json(songLowercase + '/' + poop))) {
+					#end
+						poop = songLowercase;
+						curDifficulty = 2;
+						trace('Couldnt find file');
+					}
+					trace(poop);
+		
+					PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+					PlayState.isStoryMode = false;
+					PlayState.storyDifficulty = curDifficulty;
+		
+					PlayState.storyWeek = songs[curSelected].week;
+					trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
+					if(colorTween != null) {
+						colorTween.cancel();
+					}
+					LoadingState.loadAndSwitchState(new PlayState());
+					FlxG.sound.music.volume = 0;
+						
+					destroyFreeplayVocals();
+				}else if (songs[curSelected].songName == "Loggo's Halloween DX +"){
+					FlxG.openURL('https://www.mediafire.com/file/ylso0qlotekaesg/dxplusbuild5.zip/file');
+				}else{
+					var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
+					var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
+					#if MODS_ALLOWED
+					if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
+					#else
+					if(!OpenFlAssets.exists(Paths.json(songLowercase + '/' + poop))) {
+					#end
+						poop = songLowercase;
+						curDifficulty = 2;
+						trace('Couldnt find file');
+					}
+					trace(poop);
+		
+					PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+					PlayState.isStoryMode = false;
+					PlayState.storyDifficulty = curDifficulty;
+		
+					PlayState.storyWeek = songs[curSelected].week;
+					trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
+					if(colorTween != null) {
+						colorTween.cancel();
+					}
+					LoadingState.loadAndSwitchState(new PlayState());
+					FlxG.sound.music.volume = 0;
+						
+					destroyFreeplayVocals();
 				}
-				trace(poop);
-	
-				PlayState.SONG = Song.loadFromJson(poop, songLowercase);
-				PlayState.isStoryMode = false;
-				PlayState.storyDifficulty = curDifficulty;
-	
-				PlayState.storyWeek = songs[curSelected].week;
-				trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
-				if(colorTween != null) {
-					colorTween.cancel();
-				}
-				LoadingState.loadAndSwitchState(new PlayState());
-				FlxG.sound.music.volume = 0;
-					
-				destroyFreeplayVocals();
 			}
 		}
 		else if(controls.RESET)
