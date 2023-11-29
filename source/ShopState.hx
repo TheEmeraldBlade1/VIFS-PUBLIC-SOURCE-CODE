@@ -202,9 +202,14 @@ class ShopState extends MusicBeatState
         ['right', 'bf-mean', 'bf-mean2', 0, false, 'Mean Bf 2nd Icons', "", BF],
         ['right', 'bf-mean2', 'whitewho', 450, false, 'Mean Bf', "", BF],
         ['right', 'whitewho', 'whitemad', 675, false, 'Mean Bf 2nd Icons', "", BF],
-        ['right', 'bf-old', 'bluewhop', 21821, false, 'Blue (Who)', "", BF],
-        ['right', 'bluewhop', 'bluemadp', 21821, false, 'Blue (Mad)', "", BF],
+        ['right', 'bf-old', 'bluewhop', 0, false, 'Blue (Who)', "", BF],
+        ['right', 'bluewhop', 'bluemadp', 0, false, 'Blue (Mad)', "", BF],
         ['right', 'bfminus', 'GFm', 666, false, 'Minus Gf', "", GF],
+        ['right', 'whitemad', 'limep', 0, false, 'Lime', "", BF],
+        ['right', 'limep', 'whop', 0, false, 'Who', "", BF],
+        ['right', 'whop', 'jadsp', 0, false, 'Jads', "", BF],
+        ['right', 'jadsp', 'bfr', 0, false, 'Boyfriend (Reactor)', "", BF],
+        ['right', 'bfr', 'gfr', 0, false, 'Girlfriend (Reactor)', "", GF],
     ];
 
     var root:ShopNode;
@@ -281,9 +286,14 @@ class ShopState extends MusicBeatState
                 ['right', 'bf-mean', 'bf-mean2', 0, false, 'Mean Bf 2nd Icons', "", BF],
                 ['right', 'bf-mean2', 'whitewho', 450, false, 'White (Who)', "", BF],
                 ['right', 'whitewho', 'whitemad', 675, false, 'White (Mad)', "", BF],
-                ['right', 'bf-old', 'bluewhop', 21821, false, 'Blue (Who)', "", BF],
-                ['right', 'bluewhop', 'bluemadp', 21821, false, 'Blue (Mad)', "", BF],
+                ['right', 'bf-old', 'bluewhop', 0, false, 'Blue (Who)', "", BF],
+                ['right', 'bluewhop', 'bluemadp', 0, false, 'Blue (Mad)', "", BF],
                 ['right', 'bfminus', 'GFm', 666, false, 'Minus Gf', "", GF],
+                ['right', 'whitemad', 'limep', 0, false, 'Lime', "", BF],
+                ['right', 'limep', 'whop', 0, false, 'Who', "", BF],
+                ['right', 'whop', 'jadsp', 0, false, 'Jads', "", BF],
+                ['right', 'jadsp', 'bfr', 0, false, 'Boyfriend (Reactor)', "", BF],
+                ['right', 'bfr', 'gfr', 0, false, 'Girlfriend (Reactor)', "", GF],
             ];
         }
 

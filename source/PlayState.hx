@@ -3056,7 +3056,13 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		if (ratingString == '?'){
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+		}else if (songMisses > 0 && ratingString != '?'){
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+		}else{
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+		}
 		#end
 		super.create();
 		if ((SONG.song.toLowerCase() == 'mando' || SONG.song.toLowerCase() == 'dlow') && isStoryMode){
@@ -3758,9 +3764,9 @@ class PlayState extends MusicBeatState
 
 			startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 			{
-				if (curSong == 'Ejected'){
+				/*if (curSong == 'Ejected'){
 					startVideo('ejected');
-				}
+				}*/
 				if (tmr.loopsLeft % gfSpeed == 0 && !gf.stunned && gf.animation.curAnim.name != null && !gf.animation.curAnim.name.startsWith("sing"))
 				{
 					gf.dance();
@@ -3975,7 +3981,13 @@ class PlayState extends MusicBeatState
 		}
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
+		if (ratingString == '?'){
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+		}else if (songMisses > 0 && ratingString != '?'){
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+		}else{
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+		}
 		#end
 		setOnLuas('songLength', songLength);
 		callOnLuas('onSongStart', []);
@@ -4476,11 +4488,23 @@ class PlayState extends MusicBeatState
 			#if desktop
 			if (startTimer.finished)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				if (ratingString == '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+				}else if (songMisses > 0 && ratingString != '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+				}else{
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+				}
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				if (ratingString == '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+				}else if (songMisses > 0 && ratingString != '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+				}else{
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+				}
 			}
 			#end
 		}
@@ -4495,11 +4519,23 @@ class PlayState extends MusicBeatState
 		{
 			if (Conductor.songPosition > 0.0)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				if (ratingString == '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+				}else if (songMisses > 0 && ratingString != '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+				}else{
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+				}
 			}
 			else
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				if (ratingString == '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+				}else if (songMisses > 0 && ratingString != '?'){
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+				}else{
+					DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+				}
 			}
 		}
 		#end
@@ -4512,7 +4548,13 @@ class PlayState extends MusicBeatState
 		#if desktop
 		if (health > 0 && !paused)
 		{
-			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+			if (ratingString == '?'){
+				DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+			}else if (songMisses > 0 && ratingString != '?'){
+				DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+			}else{
+				DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+			}
 		}
 		#end
 
@@ -4637,6 +4679,17 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		#if desktop
+		// Updating Discord Rich Presence (with Time Left)
+		if (ratingString == '?'){
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+		}else if (songMisses > 0 && ratingString != '?'){
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+		}else{
+			DiscordClient.changePresence(detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+		}
+		#end
+
 		if (curStage == 'victory'){
 			healthBar.alpha = 0;
 			healthBarBG.alpha = 0;
@@ -5228,7 +5281,13 @@ class PlayState extends MusicBeatState
 			}
 			
 				#if desktop
-				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				if (ratingString == '?'){
+					DiscordClient.changePresence(detailsPausedText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+				}else if (songMisses > 0 && ratingString != '?'){
+					DiscordClient.changePresence(detailsPausedText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+				}else{
+					DiscordClient.changePresence(detailsPausedText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+				}
 				#end
 			}
 		}
@@ -6127,7 +6186,13 @@ class PlayState extends MusicBeatState
 				
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
-				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				if (ratingString == '?'){
+					DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString, iconP2.getCharacter(), false, "");
+				}else if (songMisses > 0 && ratingString != '?'){
+					DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "RatingFC: " + ratingAcc);
+				}else{
+					DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " | Score: " + songScore + " | Misses: " + songMisses + " | Rating: " + ratingString + " (" + ((Math.floor(ratingPercent * 10000) / 100)) + "%)", iconP2.getCharacter(), false, "");
+				}
 				#end
 				isDead = true;
 				return true;
@@ -7094,7 +7159,7 @@ class PlayState extends MusicBeatState
 			if (isStoryMode)
 			{
 
-				var beansValue:Int = Std.int(campaignScore / 600);
+				var beansValue:Int = Std.int(campaignScore / 300);
 				if (songScore != 0){
 					add(new BeansPopup(beansValue, camOther));
 				}
@@ -7175,7 +7240,7 @@ class PlayState extends MusicBeatState
 			}
 			else if (loadedmenu)
 			{
-				var beansValue:Int = Std.int(songScore / 600);
+				var beansValue:Int = Std.int(songScore / 300);
 				if (songScore != 0){
 					add(new BeansPopup(beansValue, camOther));
 				}
@@ -7196,7 +7261,7 @@ class PlayState extends MusicBeatState
 			}
 			else if (loadedmenu2)
 			{
-				var beansValue:Int = Std.int(songScore / 600);
+				var beansValue:Int = Std.int(songScore / 300);
 				if (songScore != 0){
 					add(new BeansPopup(beansValue, camOther));
 				}
@@ -7218,7 +7283,7 @@ class PlayState extends MusicBeatState
 			}
 			else if (loadedmenu3)
 			{
-				var beansValue:Int = Std.int(songScore / 600);
+				var beansValue:Int = Std.int(songScore / 300);
 				if (songScore != 0){
 					add(new BeansPopup(beansValue, camOther));
 				}
@@ -7234,7 +7299,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				var beansValue:Int = Std.int(songScore / 600);
+				var beansValue:Int = Std.int(songScore / 300);
 				if (songScore != 0){
 					add(new BeansPopup(beansValue, camOther));
 				}

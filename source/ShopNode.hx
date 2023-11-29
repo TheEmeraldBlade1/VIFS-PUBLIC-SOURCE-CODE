@@ -154,7 +154,9 @@ class ShopNode extends FlxSprite
             }else if (name == 'bf-mean'
             || name == 'bf-mean2' || name == 'bfminus' || name == 'bf-old'
             || name == 'whitewho' || name == 'whitemad'
-            || name == 'bluewhop' || name == 'bluemadp' || name == 'GFm'){
+            || name == 'bluewhop' || name == 'bluemadp' || name == 'GFm'
+            || name == 'bfr' || name == 'gfr' || name == 'gfdead'
+            || name == 'limep' || name == 'whop' || name == 'jadsp'){
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits3', 'impostor');
             }else{
                 portrait.frames = Paths.getSparrowAtlas('shop/portraits', 'impostor');

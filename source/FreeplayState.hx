@@ -44,6 +44,7 @@ class FreeplayState extends MusicBeatState
 	var weeks:Array<String> = ['WEEK 1', 'WEEK 2', 'WEEK 3', 'WEEK 5', 'WEEK 6', 'WEEK 7', 'WEEK J'
 	, 'Modded Roles', '???', 'EXTRAS', 'HENRY'
 	, 'The Skinny Nuts Saga', 'Forever Gone', ''
+	, 'WEEK L'
 	];
 
 	private var iconArray:Array<HealthIcon> = [];
@@ -157,6 +158,13 @@ class FreeplayState extends MusicBeatState
 			addSong('voting-time', 1, 'votingtime', FlxColor.RED);
 			addSong('turbulence', 1, 'redmungus', FlxColor.RED);
 			addSong('victory', 1, 'warchief', FlxColor.PURPLE);
+
+			addSong('WEEK L', 1, ' ', FlxColor.WHITE);
+
+			addSong('Lemon Lime', 1, 'jads', FlxColor.LIME);
+			addSong('Chlorescene', 1, 'jads', FlxColor.LIME);
+			addSong('Inflorescence', 1, 'jads', FlxColor.LIME);
+			addSong('Stargazer', 1, 'jads', FlxColor.LIME);
 	
 			addSong('Modded Roles', 1, ' ', FlxColor.WHITE);
 	
@@ -166,8 +174,8 @@ class FreeplayState extends MusicBeatState
 			addSong('Ominous', 1, 'black', FlxColor.BLACK);
 			addSong('Finale', 1, 'black', FlxColor.BLACK);
 			addSong('True Finale', 1, 'black', FlxColor.BLACK);
-			addSong('Final Finale', 1, 'black', FlxColor.BLACK);
-			addSong('Final Fates Of Destiny', 1, 'black', FlxColor.BLACK);
+			//addSong('Final Finale', 1, 'black', FlxColor.BLACK);
+			//addSong('Final Fates Of Destiny', 1, 'black', FlxColor.BLACK);
 	
 			addSong('HENRY', 1, ' ', FlxColor.WHITE);
 	
@@ -190,13 +198,13 @@ class FreeplayState extends MusicBeatState
 			addSong('Fight Or Flight', 1, 'lime', FlxColor.LIME);
 			addSong('Escape From The City', 1, 'sonic', FlxColor.BLUE);
 
-			//addSong("Loggo's Halloween DX +", 1, 'loggo', FlxColor.GREEN);
+			//addSong("Loggo's Halloween DX+", 1, 'loggo', FlxColor.GREEN);
 
 			addSong('Defeat Old', 1, 'blackold', FlxColor.BLACK);
 
-			addSong('Forever Gone', 1, ' ', FlxColor.WHITE);
+			/*addSong('Forever Gone', 1, ' ', FlxColor.WHITE);
 
-			addSong('Lost Fever', 1, 'black', FlxColor.BLUE);
+			addSong('Lost Fever', 1, 'black', FlxColor.BLUE);*/
 		}
 
 		// LOAD CHARACTERS
@@ -421,7 +429,7 @@ class FreeplayState extends MusicBeatState
 					FlxG.sound.music.volume = 0;
 						
 					destroyFreeplayVocals();
-				}else if (songs[curSelected].songName == "Loggo's Halloween DX +"){
+				}else if (songs[curSelected].songName == "Loggo's Halloween DX+"){
 					FlxG.openURL('https://www.mediafire.com/file/ylso0qlotekaesg/dxplusbuild5.zip/file');
 				}else{
 					var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
