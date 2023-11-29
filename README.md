@@ -2,3 +2,4 @@ the source code for vifs
 requires you import
 into the base code
 of psych engine 0.4.2
+UNZIPP THE ZIP FILES INTO THEIR OWN FOLDER AND MERGE THE ASSETS FOLDERS INTO ONE BIG FOLDER ASSETS CAN BE FOUND IN THE RELEASE PAGES
