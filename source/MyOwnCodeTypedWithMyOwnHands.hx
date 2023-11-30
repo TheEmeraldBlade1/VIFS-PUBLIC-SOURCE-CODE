@@ -9,6 +9,6 @@ class MyOwnCodeTypedWithMyOwnHands
     lmfao += gay3;
     pansexual += gay4;
     bisexual += gay;
-    lesbian += gay2 * rng; // will add rng code when i get home
+    lesbian += gay2;
   }
 }

@@ -566,6 +566,11 @@ class PlayState extends MusicBeatState
 		hits2 = 0;
 		earlys = 0;
 
+		MyOwnCodeTypedWithMyOwnHands.lmfao = 0.00;
+		MyOwnCodeTypedWithMyOwnHands.pansexual = 0.00;
+		MyOwnCodeTypedWithMyOwnHands.bisexual = 0;
+		MyOwnCodeTypedWithMyOwnHands.lesbian = 0;
+
 		/*if (!Main.debugBuild){
 			ClientPrefs.overRidebfDebug = false;
 			ClientPrefs.overRidegfDebug = false;
@@ -5251,9 +5256,9 @@ class PlayState extends MusicBeatState
 			scoreTxt.text += ' |';*/
 
 		if (!simplejudge)
-			judgementCounter.text = '[' + ratingAAAA + "]" + '\nSicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + " (" + highestCombo + ')\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + '\nNPS: ' + nps + "\nMax: " + maxNPS + "\nHealth: " +  Math.round(health * 50) + "%\n";
+			judgementCounter.text = '[' + ratingAAAA + "]" + '\nSicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + " (" + highestCombo + ')\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + '\nNPS: ' + nps + "\nMax: " + maxNPS + "\nHealth: " +  Math.round(health * 50) + "%\n" + MyOwnCodeTypedWithMyOwnHands.bisexual + "." + MyOwnCodeTypedWithMyOwnHands.lesbian + "%\n";
 		else
-			judgementCounter.text = 'Sicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + '\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + "\n";
+			judgementCounter.text = 'Sicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + '\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + "\n" + MyOwnCodeTypedWithMyOwnHands.bisexual + "." + MyOwnCodeTypedWithMyOwnHands.lesbian + "%\n";
 
 		if (ClientPrefs.antim)
 			judgementCounter.text += '\nEarlys: ' + earlys;
@@ -5456,11 +5461,33 @@ class PlayState extends MusicBeatState
 		if (health < 0)
 			health = 0;
 
-		if (practiceMode)
-		{
-			if (health < 0)
-				health = 0;			
+		if (goods == 0 && bads == 0 && shits == 0){
+			if (MyOwnCodeTypedWithMyOwnHands.bisexual > 100)
+				MyOwnCodeTypedWithMyOwnHands.bisexual = 100;
+		}else{
+			if (MyOwnCodeTypedWithMyOwnHands.bisexual > 99)
+				MyOwnCodeTypedWithMyOwnHands.bisexual = 99;
 		}
+		if (MyOwnCodeTypedWithMyOwnHands.lesbian > 99)
+			MyOwnCodeTypedWithMyOwnHands.lesbian = 99;
+		if (goods == 0 && bads == 0 && shits == 0){
+			if (MyOwnCodeTypedWithMyOwnHands.pansexual > 100)
+				MyOwnCodeTypedWithMyOwnHands.pansexual = 100;
+		}else{
+			if (MyOwnCodeTypedWithMyOwnHands.pansexual > 99.99)
+				MyOwnCodeTypedWithMyOwnHands.pansexual = 99.99;
+		}
+		if (MyOwnCodeTypedWithMyOwnHands.lmfao > 99.99)
+			MyOwnCodeTypedWithMyOwnHands.lmfao = 99.99;	
+
+		if (MyOwnCodeTypedWithMyOwnHands.bisexual < 0)
+			MyOwnCodeTypedWithMyOwnHands.bisexual = 0;
+		if (MyOwnCodeTypedWithMyOwnHands.lesbian < 0)
+			MyOwnCodeTypedWithMyOwnHands.lesbian = 0;
+		if (MyOwnCodeTypedWithMyOwnHands.pansexual < 0)
+			MyOwnCodeTypedWithMyOwnHands.pansexual = 0;
+		if (MyOwnCodeTypedWithMyOwnHands.lmfao < 0)
+			MyOwnCodeTypedWithMyOwnHands.lmfao = 0;	
 
 		if (songScore < 0)
 			songScore = 0;	
@@ -7407,6 +7434,7 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);	
 					scoreTxt.color = FlxColor.CYAN;		
 					vifsWatermark.color = FlxColor.CYAN;	
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
 				}
 				else
 				{
@@ -7421,6 +7449,7 @@ class PlayState extends MusicBeatState
 						songScore = 0;
 						songScore2 = 0;
 					}
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(-25,-13,0,0);
 					if (ClientPrefs.antim)
 					{
 						//noteMiss(note);
@@ -7467,6 +7496,7 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);	
 					scoreTxt.color = FlxColor.CYAN;	
 					vifsWatermark.color = FlxColor.CYAN;
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
 				}
 				else
 				{
@@ -7480,6 +7510,7 @@ class PlayState extends MusicBeatState
 					}
 					scoreTxt.color = FlxColor.ORANGE;
 					vifsWatermark.color = FlxColor.ORANGE;
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(5,2,0,0);
 					if (!holdnotehp)
 						{
 							if (ClientPrefs.hpgain)
@@ -7508,6 +7539,7 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);	
 					scoreTxt.color = FlxColor.CYAN;		
 					vifsWatermark.color = FlxColor.CYAN;
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
 				}
 				else
 				{
@@ -7521,6 +7553,7 @@ class PlayState extends MusicBeatState
 					}
 					scoreTxt.color = FlxColor.LIME;
 					vifsWatermark.color = FlxColor.LIME;
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(8,5,0,0);
 					if (!holdnotehp)
 						{
 							if (ClientPrefs.hpgain)
@@ -7547,6 +7580,7 @@ class PlayState extends MusicBeatState
 				spawnNoteSplashOnNote(note);
 				scoreTxt.color = FlxColor.CYAN;
 				vifsWatermark.color = FlxColor.CYAN;
+				MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
 				if (!holdnotehp)
 					{
 						if (ClientPrefs.hpgain)
@@ -7883,6 +7917,8 @@ class PlayState extends MusicBeatState
 			trace(daNote.missHealth);
 		}
 		songMisses++;
+
+		MyOwnCodeTypedWithMyOwnHands.ratingUpdate(-25,-13,0,0);
 
 		scoreTxt.color = FlxColor.fromRGB(82,35,47);
 		vifsWatermark.color = FlxColor.fromRGB(82,35,47);
