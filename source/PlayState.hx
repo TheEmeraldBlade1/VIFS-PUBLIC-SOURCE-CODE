@@ -77,6 +77,23 @@ class PlayState extends MusicBeatState
 
 	var stopEvents:Bool = false;
 
+		// - fight or flight
+		var deadHedgehog:BGSprite;
+		var mcdonaldTowers:BGSprite;
+		var burgerKingCities:BGSprite;
+		var wendysLight:FlxSprite;
+		var pizzaHutStage:BGSprite;
+		// - the fear mechanic
+		var fearUi:FlxSprite;
+		var fearUiBg:FlxSprite;
+		var fearTween:FlxTween;
+		var fearTimer:FlxTimer;
+		public var fearNo:Float = 0;
+		public var fearBar:FlxBar;
+		public static var isFear:Bool = false;
+		var doFearCheck = false;
+		var fearNum:FlxText;
+
 	public var tweeningChar:Bool = false;
 
 		//armed
@@ -86,7 +103,7 @@ class PlayState extends MusicBeatState
 
 	var noMissBf:Array<String> = ['Victory_BF'];
 
-	var fofStages:Array<String> = ['monochrome', 'esculent', 'nuzzus', 'limeStarved', 'LostFever'];
+	var fofStages:Array<String> = ['monochrome', 'esculent', 'nuzzus', 'limeStarved', 'LostFever', 'starved'];
 
 	var blackChars:Array<String> = ['black', 'blackdk', 'black-run', 'blackalt', 'blackparasite'];
 
@@ -516,6 +533,7 @@ class PlayState extends MusicBeatState
 	public var earlys:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
+	public var starvedFearBarReduce:Int = 0;
 	public var ghostMisses:Int = 0;
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
@@ -737,6 +755,53 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'starved':
+				// fhjdslafhlsa dead hedgehogs
+
+				/*———————————No hedgehogs?———————————
+				⠀⣞⢽⢪⢣⢣⢣⢫⡺⡵⣝⡮⣗⢷⢽⢽⢽⣮⡷⡽⣜⣜⢮⢺⣜⢷⢽⢝⡽⣝
+				⠸⡸⠜⠕⠕⠁⢁⢇⢏⢽⢺⣪⡳⡝⣎⣏⢯⢞⡿⣟⣷⣳⢯⡷⣽⢽⢯⣳⣫⠇
+				⠀⠀⢀⢀⢄⢬⢪⡪⡎⣆⡈⠚⠜⠕⠇⠗⠝⢕⢯⢫⣞⣯⣿⣻⡽⣏⢗⣗⠏⠀
+				⠀⠪⡪⡪⣪⢪⢺⢸⢢⢓⢆⢤⢀⠀⠀⠀⠀⠈⢊⢞⡾⣿⡯⣏⢮⠷⠁⠀⠀
+				⠀⠀⠀⠈⠊⠆⡃⠕⢕⢇⢇⢇⢇⢇⢏⢎⢎⢆⢄⠀⢑⣽⣿⢝⠲⠉⠀⠀⠀⠀
+				⠀⠀⠀⠀⠀⡿⠂⠠⠀⡇⢇⠕⢈⣀⠀⠁⠡⠣⡣⡫⣂⣿⠯⢪⠰⠂⠀⠀⠀⠀
+				⠀⠀⠀⠀⡦⡙⡂⢀⢤⢣⠣⡈⣾⡃⠠⠄⠀⡄⢱⣌⣶⢏⢊⠂⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⢝⡲⣜⡮⡏⢎⢌⢂⠙⠢⠐⢀⢘⢵⣽⣿⡿⠁⠁⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠨⣺⡺⡕⡕⡱⡑⡆⡕⡅⡕⡜⡼⢽⡻⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⣼⣳⣫⣾⣵⣗⡵⡱⡡⢣⢑⢕⢜⢕⡝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⣴⣿⣾⣿⣿⣿⡿⡽⡑⢌⠪⡢⡣⣣⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⡟⡾⣿⢿⢿⢵⣽⣾⣼⣘⢸⢸⣞⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+				⠀⠀⠀⠀⠁⠇⠡⠩⡫⢿⣝⡻⡮⣒⢽⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+				—————————————————————————————*/
+
+				GameOverSubstate.deathSoundName = 'starved-death';
+				GameOverSubstate.loopSoundName = 'starved-loop';
+				GameOverSubstate.endSoundName = 'starved-retry';
+				GameOverSubstate.characterName = 'bf-starved-die';
+
+				defaultCamZoom = 0.85;
+				burgerKingCities = new BGSprite('starved/city', -100, 0, 1, 0.9);
+				burgerKingCities.setGraphicSize(Std.int(burgerKingCities.width * 1.5));
+				add(burgerKingCities);
+
+				mcdonaldTowers = new BGSprite('starved/towers', -100, 0, 1, 0.9);
+				mcdonaldTowers.setGraphicSize(Std.int(mcdonaldTowers.width * 1.5));
+				add(mcdonaldTowers);
+
+				pizzaHutStage = new BGSprite('starved/stage', -100, 0, 1, 0.9);
+				pizzaHutStage.setGraphicSize(Std.int(pizzaHutStage.width * 1.5));
+				add(pizzaHutStage);
+
+				// sonic died
+				deadHedgehog = new BGSprite('starved/sonicisfuckingdead', 0, 100, 1, 0.9);
+				deadHedgehog.setGraphicSize(Std.int(deadHedgehog.width * 0.65));
+				add(deadHedgehog);
+
+				// hes still dead
+
+				wendysLight = new BGSprite('starved/light', 0, 0, 1, 0.9);
+				wendysLight.setGraphicSize(Std.int(wendysLight.width * 1.2));
+
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
@@ -2081,7 +2146,7 @@ class PlayState extends MusicBeatState
 				add(momGroup);
 		}
 
-		if (curStage != 'turbulence'){
+		if (curStage != 'turbulence' && curStage != 'starved'){
 			add(boyfriendGroup);
 			add(dadGroup);
 		}
@@ -2089,6 +2154,11 @@ class PlayState extends MusicBeatState
 		if (curStage == 'turbulence'){
 			add(dadGroup);
 			add(hookarm);
+			add(boyfriendGroup);
+		}
+
+		if (curStage == 'starved'){
+			add(dadGroup);
 			add(boyfriendGroup);
 		}
 
@@ -2529,6 +2599,10 @@ class PlayState extends MusicBeatState
 		}
 		gfGroup.add(gf);
 
+		if (curStage == 'starved'){
+			gfGroup.visible = false;
+		}
+
 		switch(gf.curCharacter){
 			case 'gfpolus':
 				if (curStage != 'polus2' || curStage != 'polus3'){
@@ -2634,6 +2708,14 @@ class PlayState extends MusicBeatState
 		{
 			pet.alpha = 1;
 			boyfriendGroup.add(pet);
+		}
+
+		switch (curStage){
+			case 'starved':
+				// boyfriend.x -= 500;
+				boyfriend.y += 75;
+				dad.x += 300;
+				dad.y -= 350;
 		}
 
 		add(loBlack);
@@ -2928,6 +3010,34 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+				// nabbed this code from starlight lmao
+				if (dad.curCharacter == 'starved')
+					{
+						fearUi = new FlxSprite().loadGraphic(Paths.image('fearbar'));
+						fearUi.scrollFactor.set();
+						fearUi.screenCenter();
+						fearUi.x += 580;
+						fearUi.y -= 50;
+			
+						fearUiBg = new FlxSprite(fearUi.x, fearUi.y).loadGraphic(Paths.image('fearbarBG'));
+						fearUiBg.scrollFactor.set();
+						fearUiBg.screenCenter();
+						fearUiBg.x += 580;
+						fearUiBg.y -= 50;
+						add(fearUiBg);
+			
+						fearBar = new FlxBar(fearUi.x + 30, fearUi.y + 5, BOTTOM_TO_TOP, 21, 275, this, 'fearNo', 0, 100);
+						fearBar.scrollFactor.set();
+						fearBar.visible = true;
+						fearBar.numDivisions = 1000;
+						fearBar.createFilledBar(0x00000000, 0xFFFF0000);
+						trace('bar added.');
+			
+						add(fearBar);
+						add(fearUi);
+					}
+			
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -2943,6 +3053,12 @@ class PlayState extends MusicBeatState
 		judgementCounter.cameras = [camHUD];
 		healthBarOverlay.cameras = [camHUD];
 		vifsWatermark.cameras = [camHUD];
+		if (dad.curCharacter == 'starved')
+			{
+				fearUiBg.cameras = [camHUD];
+				fearBar.cameras = [camHUD];
+				fearUi.cameras = [camHUD];
+			}
 		//Ratings.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		votingnotes.cameras = [camHUD];
@@ -3706,6 +3822,17 @@ class PlayState extends MusicBeatState
 							healthBarOverlay.angle += 90;
 							healthBarOverlay.x += 500;
 							healthBarOverlay.y = healthBarBG.y - 295;
+							if (curStage == 'starved')
+								{
+									if (!ClientPrefs.middleScroll)
+										{
+											playerStrums.forEach(function(spr:FlxSprite)
+											{
+												spr.x -= 332;
+												spr.y -= 35;
+											});
+										}
+								}
 						}
 						if (curStage == 'nuzzus' || SONG.song.toLowerCase() == 'double trouble' || SONG.song.toLowerCase() == 'ejected'){
 							if (SONG.song.toLowerCase() != 'double trouble' && SONG.song.toLowerCase() != 'ejected'){
@@ -4685,6 +4812,44 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+					// fear shit for starved
+					if (dad.curCharacter == 'starved')
+						{
+							isFear = true;
+							fearBar.visible = true;
+							fearBar.filledCallback = function()
+							{
+								health = 0;
+							}
+							// this is such a shitcan method i really should come up with something better tbf
+							if (fearNo >= 10 && fearNo < 19)
+								health -= 0.1 * elapsed;
+							else if (fearNo >= 60 && fearNo < 69)
+								health -= 0.30 * elapsed;
+							else if (fearNo >= 70 && fearNo < 79)
+								health -= 0.50 * elapsed;
+							else if (fearNo >= 80 && fearNo < 89)
+								health -= 0.70 * elapsed;
+							else if (fearNo >= 90 && fearNo < 99)
+								health -= 0.99 * elapsed;
+				
+							if (health <= 0.01)
+							{
+								health = 0.01;
+							}
+						}
+
+						if (fearNo >= 70){
+							fearNo += 0.0056;
+						}
+
+						if (dad.curCharacter == 'starved' && starvedFearBarReduce >= 20 && fearNo > 30){
+							fearNo -= 3.50;
+							if (fearNo <= 30){
+								starvedFearBarReduce = 0;
+							}
+						}
+
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
 		if (ratingString == '?'){
@@ -5264,6 +5429,15 @@ class PlayState extends MusicBeatState
 		if (ClientPrefs.antim)
 			judgementCounter.text += '\nEarlys: ' + earlys;
 
+		if (dad.curCharacter == 'starved'){
+			scoreTxt.text = 'Score: ' + songScore;
+			scoreTxt.text += ' | Sacrifices: ';
+			scoreTxt.text += songMisses;
+			scoreTxt.text += ' (' + starvedFearBarReduce + ')';
+			scoreTxt.text += ' | Rating: ' + MyOwnCodeTypedWithMyOwnHands.bisexual + "." + MyOwnCodeTypedWithMyOwnHands.lesbian + '%';
+			judgementCounter.text = '';
+		}
+
 		if(cpuControlled) {
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
@@ -5461,6 +5635,15 @@ class PlayState extends MusicBeatState
 			health = 2;
 		if (health < 0)
 			health = 0;
+
+		if (starvedFearBarReduce > 20)
+			starvedFearBarReduce = 20;
+		if (starvedFearBarReduce < 0)
+			starvedFearBarReduce = 0;
+
+		if (dad.curCharacter == 'starved' && songMisses > 20){
+			songMisses = 20;
+		}
 
 		if (goods == 0 && bads == 0 && shits == 0){
 			if (MyOwnCodeTypedWithMyOwnHands.bisexual > 100)
@@ -5848,6 +6031,12 @@ class PlayState extends MusicBeatState
 					if (health > 0.05 && !daNote.isSustainNote && dtChars.contains(dad.curCharacter)){
 						health -= 0.025;
 					}
+
+					if (dad.curCharacter == 'starved' && daNote.hitByOpponent && !daNote.isSustainNote && fearNo <= 70)
+						{
+							fearNo += 0.56;
+							// trace(fearNo);
+						}
 
 					callOnLuas('opponentNoteHit', [notes.members.indexOf(daNote), Math.abs(daNote.noteData), daNote.noteType, daNote.isSustainNote]);
 
@@ -7436,11 +7625,19 @@ class PlayState extends MusicBeatState
 					scoreTxt.color = FlxColor.CYAN;		
 					vifsWatermark.color = FlxColor.CYAN;	
 					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+					if (dad.curCharacter == 'starved'){
+						starvedFearBarReduce += 1;
+						fearNo -= 0.056;
+					}
 				}
 				else
 				{
 					daRating = 'shit';
 					score -= 500;
+					if (dad.curCharacter == 'starved'){
+						starvedFearBarReduce = 0;
+						fearNo -= 0.06;
+					}
 					if (ClientPrefs.antim)
 						score2 -= 500;
 					else
@@ -7455,12 +7652,12 @@ class PlayState extends MusicBeatState
 					{
 						//noteMiss(note);
 						noteMiss2(note);
-						if (ClientPrefs.hploss)
+						if (ClientPrefs.hploss || curStage == 'starved')
 							{
 								health -= note.missHealth2 * 2; //For testing purposes
 								trace(note.missHealth2);
 							}
-							else
+							else if (curStage != 'starved')
 							{
 								health -= note.missHealth * 2; //For testing purposes
 								trace(note.missHealth);
@@ -7468,7 +7665,7 @@ class PlayState extends MusicBeatState
 					}else{
 						if (!holdnotehp)
 							{
-								if (ClientPrefs.hpgain)
+								if (ClientPrefs.hpgain && curStage != 'starved')
 								{
 										health += note.hitHealth2;
 									//trace(note.hitHealth2);
@@ -7498,12 +7695,20 @@ class PlayState extends MusicBeatState
 					scoreTxt.color = FlxColor.CYAN;	
 					vifsWatermark.color = FlxColor.CYAN;
 					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+					if (dad.curCharacter == 'starved'){
+						starvedFearBarReduce += 1;
+						fearNo -= 0.056;
+					}
 				}
 				else
 				{
 					daRating = 'bad';
 					score -= 250;
 					score2 = 100;
+					if (dad.curCharacter == 'starved'){
+						starvedFearBarReduce -= 2;
+						fearNo -= 0.020;
+					}
 					bads += 1;
 					if (funnimode){
 						songScore = 69;
@@ -7514,7 +7719,7 @@ class PlayState extends MusicBeatState
 					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(5,2,0,0);
 					if (!holdnotehp)
 						{
-							if (ClientPrefs.hpgain)
+							if (ClientPrefs.hpgain && curStage != 'starved')
 							{
 									health += note.hitHealth2;
 								//trace(note.hitHealth2);
@@ -7541,6 +7746,10 @@ class PlayState extends MusicBeatState
 					scoreTxt.color = FlxColor.CYAN;		
 					vifsWatermark.color = FlxColor.CYAN;
 					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+					if (dad.curCharacter == 'starved'){
+						starvedFearBarReduce += 1;
+						fearNo -= 0.056;
+					}
 				}
 				else
 				{
@@ -7548,6 +7757,10 @@ class PlayState extends MusicBeatState
 					score = 250;
 					score2 = 200;
 					goods += 1;
+					if (dad.curCharacter == 'starved'){
+						starvedFearBarReduce -= 3;
+						fearNo -= 0.034;
+					}
 					if (funnimode){
 						songScore = 420;
 						songScore2 = 350;
@@ -7557,7 +7770,7 @@ class PlayState extends MusicBeatState
 					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(8,5,0,0);
 					if (!holdnotehp)
 						{
-							if (ClientPrefs.hpgain)
+							if (ClientPrefs.hpgain && curStage != 'starved')
 							{
 									health += note.hitHealth2 * 1;
 								//trace(note.hitHealth2);
@@ -7582,9 +7795,13 @@ class PlayState extends MusicBeatState
 				scoreTxt.color = FlxColor.CYAN;
 				vifsWatermark.color = FlxColor.CYAN;
 				MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+				if (dad.curCharacter == 'starved'){
+					starvedFearBarReduce += 1;
+					fearNo -= 0.056;
+				}
 				if (!holdnotehp)
 					{
-						if (ClientPrefs.hpgain)
+						if (ClientPrefs.hpgain && curStage != 'starved')
 						{
 								health += note.hitHealth2 * 2;
 							//trace(note.hitHealth2);
@@ -7907,17 +8124,27 @@ class PlayState extends MusicBeatState
 			FunctionHandler.combobreak();
 
 		combo = 0;
-		if (ClientPrefs.hploss)
+		if (ClientPrefs.hploss || curStage == 'starved')
 		{
 			health -= daNote.missHealth2; //For testing purposes
 			trace(daNote.missHealth2);
 		}
-		else
+		else if (curStage != 'starved')
 		{
 			health -= daNote.missHealth; //For testing purposes
 			trace(daNote.missHealth);
 		}
 		songMisses++;
+
+		if (dad.curCharacter == 'starved' && songMisses > 20){
+			health = 0;
+			fearNo = 999999;
+		}
+
+		if (dad.curCharacter == 'starved'){
+			starvedFearBarReduce = 0;
+			fearNo += 0.056;
+		}
 
 		MyOwnCodeTypedWithMyOwnHands.ratingUpdate(-25,-13,0,0);
 
@@ -8116,14 +8343,14 @@ class PlayState extends MusicBeatState
 				if (!boyfriend.stunned)
 				{
 					{
-						if (ClientPrefs.hploss)
+						if (ClientPrefs.hploss || curStage == 'starved')
 							health -= missHealth2;
-						else
+						else if (curStage != 'starved')
 							health -= missHealth;
 	
-						if (ClientPrefs.hploss)
+						if (ClientPrefs.hploss || curStage == 'starved')
 							trace(missHealth2);
-						else
+						else if (curStage != 'starved')
 							trace(missHealth);
 	
 						earlys += 1;
@@ -8662,6 +8889,20 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
+		if (SONG.song.toLowerCase() == 'fight or flight')
+			{
+				switch (curStep)
+				{
+					case 1:
+						timeBar.createFilledBar(FlxColor.RED, 0xFF000000);
+						timeBar.updateBar();
+					case 1184, 1471:
+						starvedLights();
+					case 1439, 1728:
+						starvedLightsFinale();
+				}
+			}
+
 		lastStepHit = curStep;
 		setOnLuas('curStep', curStep);
 		callOnLuas('onStepHit', []);
@@ -8685,6 +8926,27 @@ class PlayState extends MusicBeatState
 
 	var lightningStrikeBeat:Int = 0;
 	var lightningOffset:Int = 8;
+
+	
+	function starvedLights()
+		{
+			//i fucking love that BLAMMED LIGHTS !! !!
+			FlxTween.tween(burgerKingCities, {alpha: 0}, 1);
+			FlxTween.tween(mcdonaldTowers, {alpha: 0}, 1);
+			FlxTween.tween(pizzaHutStage, {alpha: 0}, 1);
+			FlxTween.color(deadHedgehog, 1, FlxColor.WHITE, FlxColor.RED);
+			FlxTween.color(boyfriend, 1, FlxColor.WHITE, FlxColor.RED);
+		}
+
+	function starvedLightsFinale()
+		{
+			//i fucking HATE those BLAMMED LIGHTS !! !!
+			FlxTween.tween(burgerKingCities, {alpha: 1}, 1.5);
+			FlxTween.tween(mcdonaldTowers, {alpha: 1}, 1.5);
+			FlxTween.tween(pizzaHutStage, {alpha: 1}, 1.5);
+			FlxTween.color(deadHedgehog, 1, FlxColor.RED, FlxColor.WHITE);
+			FlxTween.color(boyfriend, 1, FlxColor.RED, FlxColor.WHITE); //????? will it work lol? (update it totally worked :DDDD)
+		}
 
 	var lastBeatHit:Int = -1;
 	override function beatHit()
