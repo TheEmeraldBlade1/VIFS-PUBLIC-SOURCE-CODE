@@ -8931,6 +8931,14 @@ class PlayState extends MusicBeatState
 	function starvedLights()
 		{
 			//i fucking love that BLAMMED LIGHTS !! !!
+			FlxTween.tween(healthBarBG, {alpha: 0}, 1);
+			FlxTween.tween(healthBarOverlay, {alpha: 0}, 1);
+			FlxTween.tween(healthBar, {alpha: 0}, 1);
+			FlxTween.tween(fearUiBg, {alpha: 0}, 1);
+			FlxTween.tween(fearbarBG, {alpha: 0}, 1);
+			FlxTween.tween(fearBar, {alpha: 0}, 1);
+			FlxTween.tween(iconP1, {alpha: 0}, 1);
+			FlxTween.tween(iconP2, {alpha: 0}, 1);
 			FlxTween.tween(burgerKingCities, {alpha: 0}, 1);
 			FlxTween.tween(mcdonaldTowers, {alpha: 0}, 1);
 			FlxTween.tween(pizzaHutStage, {alpha: 0}, 1);
@@ -8941,7 +8949,14 @@ class PlayState extends MusicBeatState
 	function starvedLightsFinale()
 		{
 			//i fucking HATE those BLAMMED LIGHTS !! !!
-			FlxTween.tween(burgerKingCities, {alpha: 1}, 1.5);
+			FlxTween.tween(healthBarBG, {alpha: 1}, 1.5);
+			FlxTween.tween(healthBarOverlay, {alpha: 1}, 1.5);
+			FlxTween.tween(healthBar, {alpha: 1}, 1.5);
+			FlxTween.tween(fearUiBg, {alpha: 1}, 1.5);
+			FlxTween.tween(fearbarBG, {alpha: 1}, 1.5);
+			FlxTween.tween(fearBar, {alpha: 1}, 1.5);
+			FlxTween.tween(iconP1, {alpha: 1}, 1.5);
+			FlxTween.tween(iconP2, {alpha: 1}, 1.5);
 			FlxTween.tween(mcdonaldTowers, {alpha: 1}, 1.5);
 			FlxTween.tween(pizzaHutStage, {alpha: 1}, 1.5);
 			FlxTween.color(deadHedgehog, 1, FlxColor.RED, FlxColor.WHITE);
