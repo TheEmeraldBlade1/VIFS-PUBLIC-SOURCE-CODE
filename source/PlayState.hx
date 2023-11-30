@@ -6032,7 +6032,7 @@ class PlayState extends MusicBeatState
 						health -= 0.025;
 					}
 
-					if (dad.curCharacter == 'starved' && daNote.hitByOpponent && !daNote.isSustainNote && fearNo <= 70)
+					if (dad.curCharacter == 'starved' && daNote.hitByOpponent && fearNo <= 70)
 						{
 							fearNo += 0.56;
 							// trace(fearNo);
