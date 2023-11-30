@@ -8957,6 +8957,7 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(fearBar, {alpha: 1}, 1.5);
 			FlxTween.tween(iconP1, {alpha: 1}, 1.5);
 			FlxTween.tween(iconP2, {alpha: 1}, 1.5);
+			FlxTween.tween(burgerKingCities, {alpha: 1}, 1.5);
 			FlxTween.tween(mcdonaldTowers, {alpha: 1}, 1.5);
 			FlxTween.tween(pizzaHutStage, {alpha: 1}, 1.5);
 			FlxTween.color(deadHedgehog, 1, FlxColor.RED, FlxColor.WHITE);
