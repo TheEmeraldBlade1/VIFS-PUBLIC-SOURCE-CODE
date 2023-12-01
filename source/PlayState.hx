@@ -6611,6 +6611,12 @@ class PlayState extends MusicBeatState
 				saxguy.setPosition(-550, 275);		
 				add(saxguy);
 
+				case 'Starved Lights On':
+					starvedLights();
+
+					case 'Starved Lights Off':
+						starvedLightsFinale();
+
 				case 'Lights out':
 					camGame.flash(FlxColor.WHITE, 0.35);
 					if (boyfriend.curCharacter == 'bf')
