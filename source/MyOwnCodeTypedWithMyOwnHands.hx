@@ -6,7 +6,7 @@ class MyOwnCodeTypedWithMyOwnHands
   public static var lesbian:Int = 0;
   public static function ratingUpdate(gay:Int, gay2:Int, gay3:Float, gay4:Float)
   {
-    if (PlayState.SONG.Player2 == 'starved'){
+    if (PlayState.SONG.player2 == 'starved'){
       lmfao += gay3;
       pansexual += gay4;
       bisexual += gay;
