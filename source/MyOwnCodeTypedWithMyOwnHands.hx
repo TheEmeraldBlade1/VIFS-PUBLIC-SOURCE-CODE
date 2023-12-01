@@ -6,9 +6,15 @@ class MyOwnCodeTypedWithMyOwnHands
   public static var lesbian:Int = 0;
   public static function ratingUpdate(gay:Int, gay2:Int, gay3:Float, gay4:Float)
   {
-    lmfao += gay3;
-    pansexual += gay4;
-    bisexual += gay;
-    lesbian += gay2;
+    if (PlayState.SONG.Player2 == 'starved'){
+      lmfao += gay3;
+      pansexual += gay4;
+      bisexual += gay;
+      lesbian += gay2;
+      trace(gay);
+      trace(gay2);
+      trace(gay3);
+      trace(gay4);
+    }
   }
 }

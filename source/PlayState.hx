@@ -56,6 +56,7 @@ import Achievements;
 import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
+import flixel.math.FlxRandom;
 
 #if sys
 import sys.FileSystem;
@@ -67,6 +68,8 @@ class PlayState extends MusicBeatState
 {
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
+
+	var rng:FlxRandom = new FlxRandom();
 
 	var votingnoteRows:Array<Array<Array<Note>>> = [[],[]];
 
@@ -5530,9 +5533,9 @@ class PlayState extends MusicBeatState
 			scoreTxt.text += ' |';*/
 
 		if (!simplejudge)
-			judgementCounter.text = '[' + ratingAAAA + "]" + '\nSicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + " (" + highestCombo + ')\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + '\nNPS: ' + nps + "\nMax: " + maxNPS + "\nHealth: " +  Math.round(health * 50) + "%\n" + MyOwnCodeTypedWithMyOwnHands.bisexual + "." + MyOwnCodeTypedWithMyOwnHands.lesbian + "%\n";
+			judgementCounter.text = '[' + ratingAAAA + "]" + '\nSicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + " (" + highestCombo + ')\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + '\nNPS: ' + nps + "\nMax: " + maxNPS + "\nHealth: " +  Math.round(health * 50) + "%\n";
 		else
-			judgementCounter.text = 'Sicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + '\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + "\n" + MyOwnCodeTypedWithMyOwnHands.bisexual + "." + MyOwnCodeTypedWithMyOwnHands.lesbian + "%\n";
+			judgementCounter.text = 'Sicks: ' + sicks + '\nGoods: ' + goods + '\nBads: ' + bads + '\nShits: ' + shits + '\nCombo: ' + combo + '\nBreaks: ' + FunctionHandler.combobreaks +'\nHits: ' + hits2 + "\n";
 
 		if (ClientPrefs.antim)
 			judgementCounter.text += '\nEarlys: ' + earlys;
@@ -7756,7 +7759,7 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);	
 					scoreTxt.color = FlxColor.CYAN;		
 					vifsWatermark.color = FlxColor.CYAN;	
-					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(1,13),rng.int(1,6),0,0);
 					if (dad.curCharacter == 'starved'){
 						starvedFearBarReduce += 1;
 						fearNo -= 0.056;
@@ -7780,7 +7783,7 @@ class PlayState extends MusicBeatState
 						songScore = 0;
 						songScore2 = 0;
 					}
-					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(-25,-13,0,0);
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(-1,-23),rng.int(-1,-13),0,0);
 					if (ClientPrefs.antim)
 					{
 						//noteMiss(note);
@@ -7827,7 +7830,7 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);	
 					scoreTxt.color = FlxColor.CYAN;	
 					vifsWatermark.color = FlxColor.CYAN;
-					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(1,13),rng.int(1,6),0,0);
 					if (dad.curCharacter == 'starved'){
 						starvedFearBarReduce += 1;
 						fearNo -= 0.056;
@@ -7850,7 +7853,7 @@ class PlayState extends MusicBeatState
 					}
 					scoreTxt.color = FlxColor.ORANGE;
 					vifsWatermark.color = FlxColor.ORANGE;
-					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(5,2,0,0);
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(1,5),rng.int(1,2),0,0);
 					if (!holdnotehp)
 						{
 							if (ClientPrefs.hpgain && curStage != 'starved')
@@ -7879,7 +7882,7 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);	
 					scoreTxt.color = FlxColor.CYAN;		
 					vifsWatermark.color = FlxColor.CYAN;
-					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(1,13),rng.int(1,6),0,0);
 					if (dad.curCharacter == 'starved'){
 						starvedFearBarReduce += 1;
 						fearNo -= 0.056;
@@ -7901,7 +7904,7 @@ class PlayState extends MusicBeatState
 					}
 					scoreTxt.color = FlxColor.LIME;
 					vifsWatermark.color = FlxColor.LIME;
-					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(8,5,0,0);
+					MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(1,8),rng.int(1,5),0,0);
 					if (!holdnotehp)
 						{
 							if (ClientPrefs.hpgain && curStage != 'starved')
@@ -7928,7 +7931,7 @@ class PlayState extends MusicBeatState
 				spawnNoteSplashOnNote(note);
 				scoreTxt.color = FlxColor.CYAN;
 				vifsWatermark.color = FlxColor.CYAN;
-				MyOwnCodeTypedWithMyOwnHands.ratingUpdate(9,6,0,0);
+				MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(1,13),rng.int(1,6),0,0);
 				if (dad.curCharacter == 'starved'){
 					starvedFearBarReduce += 1;
 					fearNo -= 0.056;
@@ -8280,7 +8283,7 @@ class PlayState extends MusicBeatState
 			fearNo += 0.056;
 		}
 
-		MyOwnCodeTypedWithMyOwnHands.ratingUpdate(-25,-13,0,0);
+		MyOwnCodeTypedWithMyOwnHands.ratingUpdate(rng.int(-1,-23),rng.int(-1,-13),0,0);
 
 		scoreTxt.color = FlxColor.fromRGB(82,35,47);
 		vifsWatermark.color = FlxColor.fromRGB(82,35,47);
