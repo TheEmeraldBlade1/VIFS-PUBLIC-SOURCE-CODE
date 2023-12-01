@@ -3,4 +3,5 @@ class UltraBeanSillySongMechanics{
 	public var addScore:Int = 0;
 	public var removeMisses:Int = 0;
 	public var sillyGuy:Character;
+	public var fireNote:Note;
 }
