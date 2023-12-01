@@ -9083,10 +9083,16 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(timeBarBG, {alpha: 0}, 1);
 			FlxTween.tween(timeTxt, {alpha: 0}, 1);
 			FlxTween.tween(scoreTxt, {alpha: 0}, 1);
-			FlxTween.tween(burgerKingCities, {alpha: 0}, 1);
-			FlxTween.tween(mcdonaldTowers, {alpha: 0}, 1);
-			FlxTween.tween(pizzaHutStage, {alpha: 0}, 1);
-			FlxTween.color(deadHedgehog, 1, FlxColor.WHITE, FlxColor.RED);
+			if (curStage == 'starved'){
+				FlxTween.tween(burgerKingCities, {alpha: 0}, 1);
+				FlxTween.tween(mcdonaldTowers, {alpha: 0}, 1);
+				FlxTween.tween(pizzaHutStage, {alpha: 0}, 1);
+				FlxTween.color(deadHedgehog, 1, FlxColor.WHITE, FlxColor.RED);
+			}else{
+				FlxTween.color(dad, 1, FlxColor.WHITE, FlxColor.RED);
+				FlxTween.color(gf, 1, FlxColor.WHITE, FlxColor.RED);
+				FlxTween.color(mom, 1, FlxColor.WHITE, FlxColor.RED);
+			}
 			FlxTween.color(boyfriend, 1, FlxColor.WHITE, FlxColor.RED);
 		}
 
@@ -9107,10 +9113,16 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(timeBarBG, {alpha: 1}, 1.5);
 			FlxTween.tween(timeTxt, {alpha: 1}, 1.5);
 			FlxTween.tween(scoreTxt, {alpha: 1}, 1.5);
-			FlxTween.tween(burgerKingCities, {alpha: 1}, 1.5);
-			FlxTween.tween(mcdonaldTowers, {alpha: 1}, 1.5);
-			FlxTween.tween(pizzaHutStage, {alpha: 1}, 1.5);
-			FlxTween.color(deadHedgehog, 1, FlxColor.RED, FlxColor.WHITE);
+			if (curStage == 'starved'){
+				FlxTween.tween(burgerKingCities, {alpha: 1}, 1.5);
+				FlxTween.tween(mcdonaldTowers, {alpha: 1}, 1.5);
+				FlxTween.tween(pizzaHutStage, {alpha: 1}, 1.5);
+				FlxTween.color(deadHedgehog, 1, FlxColor.RED, FlxColor.WHITE);
+			}else{
+				FlxTween.color(dad, 1, FlxColor.RED, FlxColor.WHITE);
+				FlxTween.color(gf, 1, FlxColor.RED, FlxColor.WHITE);
+				FlxTween.color(mom, 1, FlxColor.RED, FlxColor.WHITE);
+			}
 			FlxTween.color(boyfriend, 1, FlxColor.RED, FlxColor.WHITE); //????? will it work lol? (update it totally worked :DDDD)
 		}
 
