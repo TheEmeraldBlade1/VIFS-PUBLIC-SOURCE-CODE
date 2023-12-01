@@ -5754,7 +5754,7 @@ class PlayState extends MusicBeatState
 			songMisses = 20;
 		}
 
-		if (goods == 0 && bads == 0 && shits == 0){
+		if (goods == 0 && bads == 0 && shits == 0 && songMisses == 0){
 			if (MyOwnCodeTypedWithMyOwnHands.bisexual > 100)
 				MyOwnCodeTypedWithMyOwnHands.bisexual = 100;
 		}else{
@@ -5763,7 +5763,7 @@ class PlayState extends MusicBeatState
 		}
 		if (MyOwnCodeTypedWithMyOwnHands.lesbian > 99)
 			MyOwnCodeTypedWithMyOwnHands.lesbian = 99;
-		if (goods == 0 && bads == 0 && shits == 0){
+		if (goods == 0 && bads == 0 && shits == 0 && songMisses == 0){
 			if (MyOwnCodeTypedWithMyOwnHands.pansexual > 100)
 				MyOwnCodeTypedWithMyOwnHands.pansexual = 100;
 		}else{
