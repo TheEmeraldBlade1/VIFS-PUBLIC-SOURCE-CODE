@@ -3880,8 +3880,6 @@ class PlayState extends MusicBeatState
 					}
 				if (ClientPrefs.tst)
 					scoreTxt.alpha = 0.75;
-				else
-					scoreTxt.alpha = 1;
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);
@@ -5031,8 +5029,6 @@ class PlayState extends MusicBeatState
 
 		if (ClientPrefs.tst)
 			scoreTxt.alpha = 0.75;
-		else
-			scoreTxt.alpha = 1;
 
 		if (!ClientPrefs.hss){
 			curSpeed = SONG.speed;
