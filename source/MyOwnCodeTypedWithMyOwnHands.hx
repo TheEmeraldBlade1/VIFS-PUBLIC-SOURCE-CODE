@@ -11,10 +11,8 @@ class MyOwnCodeTypedWithMyOwnHands
       pansexual += gay4;
       bisexual += gay;
       lesbian += gay2;
-      trace(gay);
-      trace(gay2);
-      trace(gay3);
-      trace(gay4);
+      trace('main accuracy:' + gay);
+      trace('2nd accuracy:' + gay2);
     }
   }
 }
