@@ -9072,9 +9072,11 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(healthBarBG, {alpha: 0}, 1);
 			FlxTween.tween(healthBarOverlay, {alpha: 0}, 1);
 			FlxTween.tween(healthBar, {alpha: 0}, 1);
-			FlxTween.tween(fearUiBg, {alpha: 0}, 1);
-			FlxTween.tween(fearUi, {alpha: 0}, 1);
-			FlxTween.tween(fearBar, {alpha: 0}, 1);
+			if (dad.curCharacter == 'starved'){
+				FlxTween.tween(fearUiBg, {alpha: 0}, 1);
+				FlxTween.tween(fearUi, {alpha: 0}, 1);
+				FlxTween.tween(fearBar, {alpha: 0}, 1);
+			}
 			FlxTween.tween(iconP1, {alpha: 0}, 1);
 			FlxTween.tween(iconP2, {alpha: 0}, 1);
 			FlxTween.tween(timeBar, {alpha: 0}, 1);
@@ -9094,9 +9096,11 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(healthBarBG, {alpha: 1}, 1.5);
 			FlxTween.tween(healthBarOverlay, {alpha: 1}, 1.5);
 			FlxTween.tween(healthBar, {alpha: 1}, 1.5);
-			FlxTween.tween(fearUiBg, {alpha: 1}, 1.5);
-			FlxTween.tween(fearUi, {alpha: 1}, 1.5);
-			FlxTween.tween(fearBar, {alpha: 1}, 1.5);
+			if (dad.curCharacter == 'starved'){
+				FlxTween.tween(fearUiBg, {alpha: 1}, 1.5);
+				FlxTween.tween(fearUi, {alpha: 1}, 1.5);
+				FlxTween.tween(fearBar, {alpha: 1}, 1.5);
+			}
 			FlxTween.tween(iconP1, {alpha: 1}, 1.5);
 			FlxTween.tween(iconP2, {alpha: 1}, 1.5);
 			FlxTween.tween(timeBar, {alpha: 1}, 1.5);
