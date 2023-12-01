@@ -72,6 +72,8 @@ class ChartingState extends MusicBeatState
 	var eventStuff:Array<Dynamic> =
 	[
 		['', "Nothing. Yep, that's right."],
+		['Starved Lights On', ""],
+		['Starved Lights Off', ""],
 		['Start Video', "Value 1: Video MP4 File Name\nExampe Ejected\nValue 2 (Optional): Hide game elements\n(a = hide camhud, b = hide game, c = both)"],
 		['Old Dt', ""],
 		['New Dt', ""],
@@ -1261,6 +1263,39 @@ class ChartingState extends MusicBeatState
 		FlxG.watch.addQuick('daBeat', curBeat);
 		FlxG.watch.addQuick('daStep', curStep);
 
+		if (FlxG.keys.justPressed.M){
+			notesCopied = [];
+			sectionToCopy = curSection;
+			for (i in 0..._song.notes[curSection].sectionNotes.length)
+			{
+				var note:Array<Dynamic> = _song.notes[curSection].sectionNotes[i];
+				notesCopied.push(note);
+			}
+		}
+		if (FlxG.keys.justPressed.N){
+			var addToTime:Float = Conductor.stepCrochet * (_song.notes[curSection].lengthInSteps * (curSection - sectionToCopy));
+			trace('Time to add: ' + addToTime);
+	
+			for (note in notesCopied)
+			{
+				var copiedNote:Array<Dynamic> = [];
+				if(note[4] != null) {
+					copiedNote = [note[0] + addToTime, note[1], note[2], note[3], note[4]];
+				} else {
+					copiedNote = [note[0] + addToTime, note[1], note[2], note[3]];
+				}
+				_song.notes[curSection].sectionNotes.push(copiedNote);
+			}
+			updateGrid();
+		}
+		if (FlxG.keys.justPressed.B){
+			_song.notes[curSection].mustHitSection;
+			check_mustHitSection.checked = _song.notes[curSection].mustHitSection;
+
+			updateGrid();
+			updateHeads();
+		}
+
 		if (FlxG.mouse.justPressed)
 		{
 			if (FlxG.mouse.overlaps(curRenderedNotes))
@@ -1330,12 +1365,12 @@ class ChartingState extends MusicBeatState
 
 		if (!blockInput)
 		{
-			/*if (FlxG.keys.justPressed.ESCAPE) HAHAAAA FUCK YOUUUU
+			if (FlxG.keys.justPressed.ESCAPE)
 			{
 				autosaveSong();
 				LoadingState.loadAndSwitchState(new editors.EditorPlayState(sectionStartTime()));
-			}*/
-			if (FlxG.keys.justPressed.ENTER || FlxG.keys.justPressed.ESCAPE)
+			}
+			if (FlxG.keys.justPressed.ENTER)
 			{
 				autosaveSong();
 				FlxG.mouse.visible = false;
