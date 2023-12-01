@@ -9075,6 +9075,7 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(timeBar, {alpha: 0}, 1);
 			FlxTween.tween(timeBarBG, {alpha: 0}, 1);
 			FlxTween.tween(timeTxt, {alpha: 0}, 1);
+			FlxTween.tween(scoreTxt, {alpha: 0}, 1);
 			FlxTween.tween(burgerKingCities, {alpha: 0}, 1);
 			FlxTween.tween(mcdonaldTowers, {alpha: 0}, 1);
 			FlxTween.tween(pizzaHutStage, {alpha: 0}, 1);
@@ -9096,6 +9097,7 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(timeBar, {alpha: 1}, 1.5);
 			FlxTween.tween(timeBarBG, {alpha: 1}, 1.5);
 			FlxTween.tween(timeTxt, {alpha: 1}, 1.5);
+			FlxTween.tween(scoreTxt, {alpha: 1}, 1.5);
 			FlxTween.tween(burgerKingCities, {alpha: 1}, 1.5);
 			FlxTween.tween(mcdonaldTowers, {alpha: 1}, 1.5);
 			FlxTween.tween(pizzaHutStage, {alpha: 1}, 1.5);
