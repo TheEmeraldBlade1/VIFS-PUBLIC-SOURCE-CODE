@@ -73,6 +73,10 @@ class PlayState extends MusicBeatState
 	public var votingnotes:FlxTypedGroup<Note>;
 	public var unspawnVotingNotes:Array<Note> = [];
 
+	var creditsText:FlxTypedGroup<FlxText>;
+	var creditoText:FlxText;
+	var box:FlxSprite;
+
 	private var task:TaskSong;
 
 	var stopEvents:Bool = false;
@@ -4099,6 +4103,49 @@ class PlayState extends MusicBeatState
 			vocals.pause();
 		}
 
+		creditsText = new FlxTypedGroup<FlxText>();
+		//in here, specify your song name and then its credits, then go to the next switch
+		if (curStage == 'starved')
+		{
+				box = new FlxSprite(0, -1000).loadGraphic(Paths.image("box"));
+				box.cameras = [camHUD];
+				box.setGraphicSize(Std.int(box.height * 0.8));
+				box.screenCenter(X);
+				add(box);
+
+				var texti:String;
+				var size:String;
+
+				texti = "CREDITS\norignal by the vs sonic.exe team\ncover by jkcrz\ncoded to be harder by emerald";
+				size = '28';
+
+				creditoText = new FlxText(0, -1000, 0, texti, 28);
+				creditoText.cameras = [camHUD];
+				creditoText.setFormat(Paths.font("PressStart2P.ttf"), Std.parseInt(size), FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				creditoText.setGraphicSize(Std.int(creditoText.width * 0.8));
+				creditoText.updateHitbox();
+				creditoText.x += 515;
+				creditsText.add(creditoText);
+				add(creditsText);
+		}
+
+		//this is the timing of the box coming in, specify your song and IF NEEDED, change the amount of time it takes to come in
+		//if you want to add it to start at the beginning of the song, type " | ", then add your song name
+		//poop fart ahahahahahah
+		if (curStage == 'starved')
+		{
+				var timei:String;
+
+				timei = "2.35";
+
+				FlxG.log.add('BTW THE TIME IS ' + Std.parseFloat(timei));
+
+				new FlxTimer().start(Std.parseFloat(timei), function(tmr:FlxTimer)
+					{
+						tweencredits();
+					});
+		}
+
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
@@ -4125,6 +4172,24 @@ class PlayState extends MusicBeatState
 		setOnLuas('songLength', songLength);
 		callOnLuas('onSongStart', []);
 	}
+
+	function tweencredits()
+		{
+			FlxTween.tween(creditoText, {y: FlxG.height - 625}, 0.5, {ease: FlxEase.circOut});
+			FlxTween.tween(box, {y: 0}, 0.5, {ease: FlxEase.circOut});
+			//tween away
+			new FlxTimer().start(3, function(tmr:FlxTimer)
+				{
+					FlxTween.tween(creditoText, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(box, {y: -1000}, 0.5, {ease: FlxEase.circOut});
+					//removal
+					new FlxTimer().start(0.5, function(tmr:FlxTimer)
+						{
+							remove(creditsText);
+							remove(box);
+						});
+				});
+		}
 
 	var debugNum:Int = 0;
 	private var noteTypeMap:Map<String, Bool> = new Map<String, Bool>();
@@ -4806,9 +4871,51 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 	var limoSpeed:Float = 0;
+	public var camDisplaceX:Float = 0;
+	public var camDisplaceY:Float = 0;
+	var lastSection:Int = 0;
 
 	var nps:Int = 0;
 	var maxNPS:Int = 0;
+
+	function updateCamFollow(?elapsed:Float){
+		if(elapsed==null)elapsed=FlxG.elapsed;
+		if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+		{
+			var char = dad;
+
+			var getCenterX = char.getMidpoint().x + 150;
+			var getCenterY = char.getMidpoint().y - 100;
+
+			camFollow.set(getCenterX + camDisplaceX + char.cameraPosition[0], getCenterY + camDisplaceY + char.cameraPosition[1]);
+
+			switch (char.curCharacter)
+			{
+				case "starved":
+					FlxG.camera.zoom = FlxMath.lerp(1.35, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+					camFollow.x += 20;
+					camFollow.y -= 70;
+				default:
+					FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+			}
+
+		}
+		else
+		{
+			var char = boyfriend;
+
+			var getCenterX = char.getMidpoint().x - 100;
+			var getCenterY = char.getMidpoint().y - 100;
+
+			camFollow.set(getCenterX + camDisplaceX - char.cameraPosition[0], getCenterY + camDisplaceY + char.cameraPosition[1]);
+
+			switch (char.curCharacter)
+			{
+				default:
+					FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+			}
+		}
+	}
 
 	override public function update(elapsed:Float)
 	{
@@ -4841,6 +4948,8 @@ class PlayState extends MusicBeatState
 
 						if (fearNo >= 70){
 							fearNo += 0.0056;
+						}else{
+							fearNo += 0.006;
 						}
 
 						if (dad.curCharacter == 'starved' && starvedFearBarReduce >= 20 && fearNo > 30){
@@ -5766,6 +5875,24 @@ class PlayState extends MusicBeatState
 
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
+
+		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
+			{
+				var curSection = Std.int(curStep / 16);
+				if (curSection != lastSection)
+				{
+					// section reset stuff
+					var lastMustHit:Bool = PlayState.SONG.notes[lastSection].mustHitSection;
+					if (PlayState.SONG.notes[curSection].mustHitSection != lastMustHit)
+					{
+						camDisplaceX = 0;
+						camDisplaceY = 0;
+					}
+					lastSection = Std.int(curStep / 16);
+				}
+	
+				updateCamFollow(elapsed);
+			}
 
 		if (camZooming && !cameraLocked)
 		{
@@ -7636,7 +7763,8 @@ class PlayState extends MusicBeatState
 					score -= 500;
 					if (dad.curCharacter == 'starved'){
 						starvedFearBarReduce = 0;
-						fearNo -= 0.06;
+						fearNo += 0.056;
+						songMisses++;
 					}
 					if (ClientPrefs.antim)
 						score2 -= 500;
@@ -7708,6 +7836,7 @@ class PlayState extends MusicBeatState
 					if (dad.curCharacter == 'starved'){
 						starvedFearBarReduce -= 2;
 						fearNo -= 0.020;
+						songMisses++;
 					}
 					bads += 1;
 					if (funnimode){
@@ -8475,6 +8604,10 @@ class PlayState extends MusicBeatState
 					//trace(note.hitHealth);
 				}
 			}
+			
+			if (dad.curCharacter == 'starved' && note.isSustainNote){
+				fearNo -= 0.020;
+			}
 
 			if (boyfriend.color == 0xFF000084)
 				boyfriend.color = FlxColor.WHITE;
@@ -8939,6 +9072,9 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(fearBar, {alpha: 0}, 1);
 			FlxTween.tween(iconP1, {alpha: 0}, 1);
 			FlxTween.tween(iconP2, {alpha: 0}, 1);
+			FlxTween.tween(timeBar, {alpha: 0}, 1);
+			FlxTween.tween(timeBarBG, {alpha: 0}, 1);
+			FlxTween.tween(timeTxt, {alpha: 0}, 1);
 			FlxTween.tween(burgerKingCities, {alpha: 0}, 1);
 			FlxTween.tween(mcdonaldTowers, {alpha: 0}, 1);
 			FlxTween.tween(pizzaHutStage, {alpha: 0}, 1);
@@ -8957,6 +9093,9 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(fearBar, {alpha: 1}, 1.5);
 			FlxTween.tween(iconP1, {alpha: 1}, 1.5);
 			FlxTween.tween(iconP2, {alpha: 1}, 1.5);
+			FlxTween.tween(timeBar, {alpha: 1}, 1.5);
+			FlxTween.tween(timeBarBG, {alpha: 1}, 1.5);
+			FlxTween.tween(timeTxt, {alpha: 1}, 1.5);
 			FlxTween.tween(burgerKingCities, {alpha: 1}, 1.5);
 			FlxTween.tween(mcdonaldTowers, {alpha: 1}, 1.5);
 			FlxTween.tween(pizzaHutStage, {alpha: 1}, 1.5);

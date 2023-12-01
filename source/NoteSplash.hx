@@ -15,6 +15,7 @@ class NoteSplash extends FlxSprite
 
 		var skin:String = 'noteSplashes';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
+		if(PlayState.SONG.player2 == 'starved') skin = 'BloodSplash';
 
 		loadAnims(skin);
 		
@@ -32,27 +33,42 @@ class NoteSplash extends FlxSprite
 		if(texture == null) {
 			texture = 'noteSplashes';
 			if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
+			if(PlayState.SONG.player2 == 'starved') texture = 'BloodSplash';
 		}
 
 		if(textureLoaded != texture) {
 			loadAnims(texture);
 		}
-		colorSwap.hue = hueColor;
-		colorSwap.saturation = satColor;
-		colorSwap.brightness = brtColor;
-		offset.set(10*(ClientPrefs.noteSize/0.7), 10*(ClientPrefs.noteSize/0.7));
-		var animNum:Int = FlxG.random.int(1, 2);
-		animation.play('note' + note + '-' + animNum, true);
-		animation.curAnim.frameRate = 24 + FlxG.random.int(-2, 2);
+		if(PlayState.SONG.player2 == 'starved'){
+			alpha = 1;
+			colorSwap.hue = 0;
+			colorSwap.saturation = 0;
+			colorSwap.brightness = 0;
+			offset.set(-40*(ClientPrefs.noteSize/0.7),-90*(ClientPrefs.noteSize/0.7));
+			animation.play('splash', true);
+			animation.curAnim.frameRate = 24;
+		}else{
+			colorSwap.hue = hueColor;
+			colorSwap.saturation = satColor;
+			colorSwap.brightness = brtColor;
+			offset.set(10*(ClientPrefs.noteSize/0.7), 10*(ClientPrefs.noteSize/0.7));
+			var animNum:Int = FlxG.random.int(1, 2);
+			animation.play('note' + note + '-' + animNum, true);
+			animation.curAnim.frameRate = 24 + FlxG.random.int(-2, 2);
+		}
 	}
 
 	function loadAnims(skin:String) {
 		frames = Paths.getSparrowAtlas(skin);
-		for (i in 1...3) {
-			animation.addByPrefix("note1-" + i, "note splash blue " + i, 24, false);
-			animation.addByPrefix("note2-" + i, "note splash green " + i, 24, false);
-			animation.addByPrefix("note0-" + i, "note splash purple " + i, 24, false);
-			animation.addByPrefix("note3-" + i, "note splash red " + i, 24, false);
+		if(PlayState.SONG.player2 == 'starved'){
+			animation.addByPrefix("splash", "Squirt", 24, false);
+		}else{
+			for (i in 1...3) {
+				animation.addByPrefix("note1-" + i, "note splash blue " + i, 24, false);
+				animation.addByPrefix("note2-" + i, "note splash green " + i, 24, false);
+				animation.addByPrefix("note0-" + i, "note splash purple " + i, 24, false);
+				animation.addByPrefix("note3-" + i, "note splash red " + i, 24, false);
+			}
 		}
 	}
 
