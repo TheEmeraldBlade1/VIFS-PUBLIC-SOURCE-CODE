@@ -3171,6 +3171,9 @@ class PlayState extends MusicBeatState
 			}
 			seenCutscene = true;
 		} else {
+			if (curStage == 'starved'){
+				updateCamFollow(1);
+			}
 			startCountdown();
 		}
 		RecalculateRating();
